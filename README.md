@@ -1,17 +1,11 @@
-# Dog team data
+# Senate Whip Count
 #### About
-This is an app to help a musher keep track of the characteristics of their dogs.
-Based on this thread: [@BlairBraverman's thread on this game](https://twitter.com/BlairBraverman/status/1224752630364352517)
-
-## Instructions:
+# Contributing:
 
 1. Fork this repo
 2. Run `npm i` to install deps
-3. Checkout a branch called `feature/dog-preferences`
+3. Checkout a branch called `feature/[FEATURE_NAME}`
 4. Run `npm start` to run locally (more info on scripts is below)
-5. Familiarize yourself with the code, and take a quick look at the UI library components used: [card component](https://ant.design/components/card/), [select component](https://ant.design/components/select/) (not more that ~20 mins)
-6. On your call, we will work through a feature addition
-7. After your call, push to your fork, and then make a pull request from your branch back to `master` on this repo.
 
 --
 # Below are instructions from Create React App
