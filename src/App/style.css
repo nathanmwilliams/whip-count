@@ -77,20 +77,3 @@ th.ant-table-cell {
   padding: 8px!important;
 }
 
-.ant-modal-body {
-  display: flex;
-  justify-content: space-between;
-}
-
-.socials {
-  font-size: 20px;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.quote {
-    border-left: 2px solid purple;
-    margin-left: 10px;
-    padding-left: 10px;
-
-}
