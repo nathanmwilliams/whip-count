@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Col, Row, Table, Popover } from "antd";
-import { map } from 'lodash';
+import { Col, Row, Table, Popover, Button } from "antd";
+import { map, filter, find } from "lodash";
 
-import { firestore } from '../utils/setup-facebook';
+import { firestore, firebasedb } from '../utils/setup-firebase';
 import { getSenatorsByStatus } from './selectors';
-
+import SenatorModal from "../Modal";
 import './style.css';
 import { STATUS_DISPLAY, STATUS_MAP } from '../constants';
 
@@ -27,33 +27,69 @@ const makeSortFunction = (key) => {
 
 class App extends Component {
   state = {
-    senators: []
-  }
+    senators: [],
+    modalSenator: null,
+  };
 
   componentDidMount = () => {
-    
-    firestore.collection('whip_count_2020').get()
+    firebasedb
+      .ref("townHalls")
+      .once("value")
+      .then((snapshot) => {
+        const townHalls = [];
+        snapshot.forEach((node) => {
+          townHalls.push(node.val());
+        });
+        this.setState({ townHalls });
+      });
+    firestore
+      .collection("whip_count_2020")
+      .get()
       .then((snapshot) => {
         const senators = [];
         snapshot.forEach((node) => {
           const data = {
             ...node.data(),
             id: node.id,
-
-          }
+          };
           senators.push(data);
-        })
+        });
         senators.sort(makeSortFunction("state"));
-        this.setState({senators})
-      }) 
-  }
+        this.setState({ senators });
+      });
+  };
 
   scrollTo = (id) => {
-    console.log(id)
+    console.log(id);
     const row = document.querySelector(`[data-row-key="${id}"]`);
-    row.scrollIntoView({ behavior: "smooth"});
+    row.scrollIntoView({ behavior: "smooth" });
+  };
 
-  }
+  renderModal = () => {
+    const { modalSenator, townHalls } = this.state;
+    if (!modalSenator) {
+      return null;
+    }
+    const thisTownhalls = filter(townHalls, {
+      officePersonId: modalSenator.id,
+    });
+    return (
+      <SenatorModal
+        visible={true}
+        senator={modalSenator}
+        townHalls={thisTownhalls}
+        closeModal={this.closeModal}
+      />
+    );
+  };
+
+  openModal = (senator) => {
+    this.setState({ modalSenator: senator });
+  };
+
+  closeModal = () => {
+    this.setState({ modalSenator: null });
+  };
 
   render() {
     const senateMapByStatus = getSenatorsByStatus(this.state.senators);
@@ -69,7 +105,12 @@ class App extends Component {
                   <div className="status-container">
                     {map(senators, (senator) => (
                       <Popover
-                        content={`${senator.party} ${senator.state}`}
+                        key={senator.id}
+                        content={
+                          <p>
+                            {senator.party} {senator.state}
+                          </p>
+                        }
                         title={`Sen. ${senator.displayName}`}
                       >
                         <div
@@ -92,28 +133,27 @@ class App extends Component {
             })}
           </Row>
           <Row className="table-container" gutter={16}>
-            <Table 
-              dataSource={this.state.senators} 
+            <Table
+              dataSource={this.state.senators}
               rowKey="id"
               pagination={false}
-             sticky scroll={{
-              x: true,
-              y: '60vh',
-
-            }}>
-              <ColumnGroup title="Name">
-                <Column
-                  title="First Name"
-                  dataIndex="first_name"
-                  key="first_name"
-                />
-                <Column
-                  title="Last Name"
-                  dataIndex="last_name"
-                  key="last_name"
-                  sorter={makeSortFunction("last_name")}
-                />
-              </ColumnGroup>
+              sticky
+              scroll={{
+                x: true,
+                y: "60vh",
+              }}
+            >
+              <Column
+                title="First Name"
+                dataIndex="first_name"
+                key="first_name"
+              />
+              <Column
+                title="Last Name"
+                dataIndex="last_name"
+                key="last_name"
+                sorter={makeSortFunction("last_name")}
+              />
               <Column
                 title="State"
                 dataIndex="state"
@@ -133,9 +173,29 @@ class App extends Component {
                 filters={STATUS_DISPLAY}
                 onFilter={(value, record) => record.status.includes(value)}
                 sorter={makeSortFunction("status")}
+                render={(id) => {
+                  return (STATUS_MAP[id])
+                }}
+              />
+              <Column
+                title="See More"
+                key="see-more"
+                render={(record) => {
+                  return (
+                    <>
+                      <Button
+                        onClick={() =>
+                          this.openModal(record)
+                        }
+                      >
+                        Details
+                      </Button>
+                    </>
+                  );
+                }}
               />
             </Table>
-            ,
+            {this.renderModal()}
           </Row>
         </div>
       </div>
