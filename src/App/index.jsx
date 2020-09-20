@@ -6,7 +6,7 @@ import { firestore, firebasedb } from '../utils/setup-firebase';
 import { getSenatorsByStatus } from './selectors';
 import SenatorModal from "../Modal";
 import './style.css';
-import { STATUS_DISPLAY, STATUS_MAP } from '../constants';
+import { STATUS_DISPLAY, STATUS_TYPES } from '../constants';
 
 const { Column, ColumnGroup } = Table;
 
@@ -101,7 +101,7 @@ class App extends Component {
             {map(senateMapByStatus, (senators, statusNo) => {
               return (
                 <Col flex={"1 1 auto"} className="status-col">
-                  <h4>{STATUS_MAP[statusNo]}</h4>
+                  <h4>{STATUS_TYPES[statusNo]}</h4>
                   <div className="status-container">
                     {map(senators, (senator) => (
                       <Popover
@@ -171,10 +171,13 @@ class App extends Component {
                 dataIndex="status"
                 key="status"
                 filters={STATUS_DISPLAY}
-                onFilter={(value, record) => record.status.includes(value)}
+                onFilter={(value, record) => {
+                  console.log(record, value)
+                  return record.status.includes(value)
+                }}
                 sorter={makeSortFunction("status")}
                 render={(id) => {
-                  return (STATUS_MAP[id])
+                  return (STATUS_TYPES[id])
                 }}
               />
               <Column

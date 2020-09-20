@@ -5,7 +5,7 @@ import {
   TwitterOutlined,
   LinkOutlined,
 } from "@ant-design/icons";
-import { STATUS_MAP } from "../constants";
+import { STATUS_TYPES } from "../constants";
 
 const { Meta } = Card;
 
@@ -27,7 +27,7 @@ const SenatorModal = ({ senator, visible, closeModal }) => (
           />
         }
       >
-        <Meta description={`Position: ${STATUS_MAP[senator.status]}`} />
+        <Meta description={`Position: ${STATUS_TYPES[senator.status]}`} />
       </Card>
       <div>
         <p className="quote">
