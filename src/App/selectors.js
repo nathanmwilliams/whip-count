@@ -1,9 +1,10 @@
 export const getSenatorsByStatus = (allSenators) => (
     allSenators.reduce((acc, cur) => {
-        if (!acc[cur.status]) {
-            acc[cur.status] = [cur]
+        const statusKey = cur.status.split('. ')[0]
+        if (!acc[statusKey]) {
+            acc[statusKey] = [cur]
         } else {
-            acc[cur.status].push(cur)
+            acc[statusKey].push(cur)
         }
         return acc;
     }, {})

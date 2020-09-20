@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Col, Row, Table } from "antd";
+import { Col, Row, Table, Popover } from "antd";
 import { map } from 'lodash';
 
 import { firestore } from '../utils/setup-facebook';
 import { getSenatorsByStatus } from './selectors';
 
 import './style.css';
-import { STATUS_DISPLAY } from '../constants';
+import { STATUS_DISPLAY, STATUS_MAP } from '../constants';
 
 const { Column, ColumnGroup } = Table;
 
@@ -62,17 +62,31 @@ class App extends Component {
         <div className="team">
           <h1>Whip Count</h1>
           <Row className="all-status-container">
-            {map(senateMapByStatus, (senators) => {
+            {map(senateMapByStatus, (senators, statusNo) => {
               return (
-                <Col flex={"1 1 auto"} className="status-container">
-                  {map(senators, (senator) => (
-                    <div className="image-container" onClick={() => this.scrollTo(senator.id)}>
-                      <img
-                        width={200}
-                        src={`https://www.govtrack.us/static/legislator-photos/${senator.govtrack_id}-100px.jpeg`}
-                      />
-                    </div>
-                  ))}
+                <Col flex={"1 1 auto"} className="status-col">
+                  <h4>{STATUS_MAP[statusNo]}</h4>
+                  <div className="status-container">
+                    {map(senators, (senator) => (
+                      <Popover
+                        content={`${senator.party} ${senator.state}`}
+                        title={`Sen. ${senator.displayName}`}
+                      >
+                        <div
+                          className={[
+                            "image-container",
+                            senator.party.toLowerCase(),
+                          ].join(" ")}
+                          onClick={() => this.scrollTo(senator.id)}
+                        >
+                          <img
+                            width={200}
+                            src={`https://www.govtrack.us/static/legislator-photos/${senator.govtrack_id}-100px.jpeg`}
+                          />
+                        </div>
+                      </Popover>
+                    ))}
+                  </div>
                 </Col>
               );
             })}
@@ -84,7 +98,7 @@ class App extends Component {
               pagination={false}
              sticky scroll={{
               x: true,
-              y: '80vh',
+              y: '60vh',
 
             }}>
               <ColumnGroup title="Name">

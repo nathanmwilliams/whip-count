@@ -40,7 +40,11 @@
 .all-status-container {
   flex-flow: row nowrap;
 }
-
+.status-col {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
 .status-container {
   display: flex;
   flex-flow: row wrap;
@@ -50,11 +54,23 @@
 }
 
 .image-container {
-  /* display: flex; */
   width: 20px;
 }
 
+.image-container.republican {
+  background-color: red;
+}
+
+.image-container.democratic {
+  background-color: blue;
+}
+
+.image-container.independent {
+  background-color: purple;
+}
 .image-container img {
   width: 100%;
   height: auto;
+  filter: grayscale(1);
+  opacity: .8;
 }
