@@ -1,11 +1,29 @@
 import React, { Component } from 'react';
-import { Col, Row } from "antd";
+import { Col, Row, Table } from "antd";
 import { map } from 'lodash';
 
 import { firestore } from '../utils/setup-facebook';
 import { getSenatorsByStatus } from './selectors';
 
 import './style.css';
+import { STATUS_DISPLAY } from '../constants';
+
+const { Column, ColumnGroup } = Table;
+
+
+
+const makeSortFunction = (key) => {
+  return (a, b) => {
+        if (a[key] > b[key]) {
+            return 1;
+          }
+          if (a[key] < b[key]) {
+            return -1;
+          }
+          return 0;
+        }
+
+}
 
 class App extends Component {
   state = {
@@ -18,10 +36,23 @@ class App extends Component {
       .then((snapshot) => {
         const senators = [];
         snapshot.forEach((node) => {
-          senators.push(node.data())
+          const data = {
+            ...node.data(),
+            id: node.id,
+
+          }
+          senators.push(data);
         })
+        senators.sort(makeSortFunction("state"));
         this.setState({senators})
       }) 
+  }
+
+  scrollTo = (id) => {
+    console.log(id)
+    const row = document.querySelector(`[data-row-key="${id}"]`);
+    row.scrollIntoView({ behavior: "smooth"});
+
   }
 
   render() {
@@ -33,9 +64,9 @@ class App extends Component {
           <Row className="all-status-container">
             {map(senateMapByStatus, (senators) => {
               return (
-                <Col flex={'1 1 auto'} className="status-container">
+                <Col flex={"1 1 auto"} className="status-container">
                   {map(senators, (senator) => (
-                    <div className="image-container">
+                    <div className="image-container" onClick={() => this.scrollTo(senator.id)}>
                       <img
                         width={200}
                         src={`https://www.govtrack.us/static/legislator-photos/${senator.govtrack_id}-100px.jpeg`}
@@ -46,8 +77,51 @@ class App extends Component {
               );
             })}
           </Row>
-          <Row className="DogTeam" gutter={16}>
-         
+          <Row className="table-container" gutter={16}>
+            <Table 
+              dataSource={this.state.senators} 
+              rowKey="id"
+              pagination={false}
+             sticky scroll={{
+              x: true,
+              y: '80vh',
+
+            }}>
+              <ColumnGroup title="Name">
+                <Column
+                  title="First Name"
+                  dataIndex="first_name"
+                  key="first_name"
+                />
+                <Column
+                  title="Last Name"
+                  dataIndex="last_name"
+                  key="last_name"
+                  sorter={makeSortFunction("last_name")}
+                />
+              </ColumnGroup>
+              <Column
+                title="State"
+                dataIndex="state"
+                key="state"
+                sorter={makeSortFunction("state")}
+              />
+              <Column
+                title="Party"
+                dataIndex="party"
+                key="party"
+                sorter={makeSortFunction("party")}
+              />
+              <Column
+                title="Status"
+                dataIndex="status"
+                key="status"
+                filters={STATUS_DISPLAY}
+                onFilter={(value, record) => record.status.includes(value)}
+                sorter={makeSortFunction("status")}
+              />
+            </Table>
+            ,
           </Row>
         </div>
       </div>

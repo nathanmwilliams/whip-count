@@ -1,12 +1,14 @@
-export const LEAD = 'lead';
-export const COMMAND_LEAD = 'commandLead';
-export const LEADS = [LEAD, COMMAND_LEAD];
-export const TEAM = 'team';
-export const WHEEL = 'wheel';
-export const NEUTERED = 'neutered';
-export const MALE = 'male';
-export const FEMALE = 'female';
-export const YEARLING = 'yearling';
-export const ASSERTIVE = 'assertive';
-export const SHORT_HAIR = 'short hair';
-export const TAGS = [NEUTERED, TEAM, WHEEL, MALE, FEMALE, LEAD, YEARLING, ASSERTIVE, SHORT_HAIR];
+export const STATUS_TYPES = [
+    "1. Do not consider nominee until new Congress in 2021", 
+    "2. Consider nominee but only after Election", 
+    "3. Consider new nominee", 
+    "4. Not on record", 
+    "5. Other status",
+]
+
+export const STATUS_DISPLAY = STATUS_TYPES.map((status) => {
+    return {
+        value: status.split('. ')[0],
+        text: status.split('. ')[1],
+    }
+})
