@@ -18,8 +18,15 @@ export const SHORT_STATUS_TYPES_LIST = [
 
 export const STATUS_COLORS = {
     1: "#5e3c99",
-    2: "#b2abd2",
-    3: "#7a7688",
+    2: "#af90ea",
+    3: "#c3c3c3",
+    4: "#e66101",
+}
+
+export const STATUS_COLORS_PROGRESS = {
+    1: "#5e3c99",
+    2: "#af90ea",
+    3: "#c3c3c3",
     4: "#e66101",
 }
 

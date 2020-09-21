@@ -10,6 +10,7 @@ import Search from "../components/Search";
 import './style.css';
 import { SHORT_STATUS_TYPES, STATUS_COLORS } from '../constants';
 import SenateTable, { makeSortFunction } from '../components/Table';
+import ProgressBar from "../components/ProgressBar";
 const { Header, Content } = Layout;
 
 const tooltipPlacement = {
@@ -174,27 +175,7 @@ class App extends Component {
               );
             })}
           </Row>
-          {senateMapByStatus[1] && (
-            <>
-              <Tooltip>
-                <Progress
-                  strokeColor={STATUS_COLORS[4]}
-                  showInfo={false}
-                  strokeLinecap="square"
-                  percent={senateMapByStatus[4].length}
-                  trailColor="#7f7f7f4d"
-                  strokeWidth={12}
-                  success={{
-                    strokeLinecap: "square",
-                    strokeColor: STATUS_COLORS[1],
-                    percent:
-                      senateMapByStatus[1].length + senateMapByStatus[2].length,
-                  }}
-                />
-                <div className="half-way"></div>
-              </Tooltip>
-            </>
-          )}
+          {senateMapByStatus[1] && <ProgressBar senateMapByStatus={senateMapByStatus} />}
           <Row className="table-container" gutter={16}>
             <SenateTable
               senators={filteredSenators}

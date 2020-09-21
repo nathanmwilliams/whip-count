@@ -74,7 +74,7 @@
 }
 
 .status__2.status-col h3{
-  color: #b2abd2
+  color: #af90ea
 }
 
 .status__3.status-col h3{
@@ -120,13 +120,7 @@
   border-radius: 0;
 }
 
-.half-way {
-  width: 50%;
-  border-right: black 1px solid;
-  height: 20px;
-  position: relative;
-  top: -21px;
-}
+
 
 @media screen and (max-width: 576px) {
   .status-container {
