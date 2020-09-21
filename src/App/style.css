@@ -1,8 +1,10 @@
 .ant-layout-header{
-
+    min-height: 64px;
+    height: fit-content;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-flow: row wrap;
 }
 
 .ant-layout-header h3 {
@@ -128,6 +130,12 @@
 @media screen and (max-width: 576px) {
   .status-container {
     display: none;
+  }
+  .ant-layout-header {
+    justify-content: space-evenly;
+  }
+  .ant-layout-header .ant-btn {
+    margin: 20px 0;
   }
 }
 

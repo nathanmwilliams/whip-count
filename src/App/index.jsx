@@ -127,7 +127,11 @@ class App extends Component {
             selectSenator={this.selectSenator}
             handleReset={this.handleReset}
           />
-          <Button ghost>
+          <Button
+            ghost
+            target="_blank"
+            href="https://docs.google.com/forms/d/e/1FAIpQLScH8KYmrnWScWJr1v3jUwMdxP5ekN5x0IZ05Q23J7SxoDoQrw/viewform"
+          >
             Submit position update
           </Button>
         </Header>
