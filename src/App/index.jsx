@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   Col,
   Row,
-  Popover,
+  Tooltip,
   Layout,
 } from "antd";
 import { map, filter } from "lodash";
@@ -17,6 +17,12 @@ import { STATUS_TYPES } from '../constants';
 import SenateTable, { makeSortFunction } from '../components/Table';
 const { Header, Content } = Layout;
 
+const tooltipPlacement = {
+  1: "right",
+  2: "top",
+  3: "top",
+  4: "left"
+}
 
 class App extends Component {
   state = {
@@ -127,14 +133,10 @@ class App extends Component {
                   <h3>{`${STATUS_TYPES[statusNo]} (${senators.length})`}</h3>
                   <div className="status-container">
                     {map(senators, (senator) => (
-                      <Popover
+                      <Tooltip
                         key={senator.id}
-                        content={
-                          <p>
-                            {senator.party} {senator.state}
-                          </p>
-                        }
-                        title={`Sen. ${senator.displayName}`}
+                        placement={tooltipPlacement[statusNo]}
+                        title={`Sen. ${senator.displayName} (${senator.party[0]}) ${senator.state}`}
                       >
                         <div
                           className={[
@@ -151,7 +153,7 @@ class App extends Component {
                             src={`https://www.govtrack.us/static/legislator-photos/${senator.govtrack_id}-100px.jpeg`}
                           />
                         </div>
-                      </Popover>
+                      </Tooltip>
                     ))}
                   </div>
                 </Col>

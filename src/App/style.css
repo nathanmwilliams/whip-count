@@ -74,6 +74,7 @@
 
 .image-container {
   width: 24px;
+  cursor: pointer;
 }
 
 .image-container.republican {
