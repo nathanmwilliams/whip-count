@@ -44,11 +44,22 @@ const townHallsDisplay = (townHalls) => (
   </Card>
 );
 
+const renderQuote = (quote) => {
+  console.log(quote)
+  return (
+    <>
+      {quote && <p className="quote-year">Statement in {quote.year}</p>}
+      <p className="quote">{quote.text}</p>
+      {quote.citation && <p className="quote-citation"><a href={quote.citation}>Link to citation</a></p>}
+    </>
+  );
+}
+
 const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
   <>
     <Modal
       width={"80%"}
-      title={`Senator ${senator.displayName} (${senator.party[0]})`}
+      title={`Senator ${senator.displayName} (${senator.party[0]}) ${senator.state}`}
       visible={visible}
       onOk={closeModal}
       onCancel={closeModal}
@@ -71,7 +82,7 @@ const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
           </Card>
         </div>
         <div className="right-container modal-col">
-          {senator.quote && <p className="quote">{senator.quote.text}</p>}
+          {senator.quote && renderQuote(senator.quote)}
           <Card
             title="Contact the senator:"
             actions={[

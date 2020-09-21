@@ -18,7 +18,20 @@ export const makeSortFunction = (key) => {
   };
 };
 
+const MD_BREAKPOINT = 768;
 class SenateTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      windowWidth: 0,
+    };
+  }
+  componentDidMount() {
+    this.setState({ width: window.innerWidth });
+    window.addEventListener("resize", () => {
+      this.setState({ width: window.innerWidth });
+    });
+  }
   getSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -103,13 +116,23 @@ class SenateTable extends React.Component {
           y: "60vh",
         }}
       >
-        <Column title="First Name" dataIndex="first_name" key="first_name" />
-        <Column
-          title="Last Name"
-          dataIndex="last_name"
-          key="last_name"
-          sorter={makeSortFunction("last_name")}
-        />
+        {this.state.width < MD_BREAKPOINT ? (
+          <Column title="Name" dataIndex="displayName" key="displayName" />
+        ) : (
+          <>
+            <Column
+              title="First Name"
+              dataIndex="first_name"
+              key="first_name"
+            />
+            <Column
+              title="Last Name"
+              dataIndex="last_name"
+              key="last_name"
+              sorter={makeSortFunction("last_name")}
+            />
+          </>
+        )}
         <Column
           {...this.getSearchProps("state")}
           title="State"
@@ -117,12 +140,14 @@ class SenateTable extends React.Component {
           width={100}
           key="state"
           sorter={makeSortFunction("state")}
+          responsive={["md"]}
         />
         <Column
           title="Party"
           dataIndex="party"
           key="party"
           sorter={makeSortFunction("party")}
+          responsive={["md"]}
         />
         <Column
           title="Status"
@@ -147,7 +172,9 @@ class SenateTable extends React.Component {
           render={(record) => {
             return (
               <>
-                <Button onClick={() => this.props.openModal(record)}>Details</Button>
+                <Button onClick={() => this.props.openModal(record)}>
+                  Details
+                </Button>
               </>
             );
           }}
