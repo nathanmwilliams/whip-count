@@ -117,10 +117,22 @@ class SenateTable extends React.Component {
         }}
       >
         <Column
-        title="Name"
-        dataIndex="displayName"
-        key="displayName"
-        sorter={makeSortFunction("last_name")}
+          title="Name"
+          dataIndex="displayName"
+          key="displayName"
+          sorter={makeSortFunction("last_name")}
+          render={(text) => {
+            return this.props.searchedSenator === text ? (
+              <Highlighter
+                highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+                searchWords={[this.props.searchedSenator]}
+                autoEscape
+                textToHighlight={text ? text.toString() : ""}
+              />
+            ) : (
+              text
+            );
+          }}
         />
         <Column
           {...this.getSearchProps("state")}

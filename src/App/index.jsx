@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Tooltip, Layout, Progress, Button } from "antd";
+import { Col, Row, Tooltip, Layout, Button } from "antd";
 import { map, filter } from "lodash";
 
 
@@ -8,7 +8,7 @@ import { getFilteredSenators, getSenatorsByStatus } from './selectors';
 import SenatorModal from "../components/Modal";
 import Search from "../components/Search";
 import './style.css';
-import { SHORT_STATUS_TYPES, STATUS_COLORS } from '../constants';
+import { SHORT_STATUS_TYPES } from '../constants';
 import SenateTable, { makeSortFunction } from '../components/Table';
 import ProgressBar from "../components/ProgressBar";
 const { Header, Content } = Layout;
@@ -75,7 +75,7 @@ class App extends Component {
     if (clearFilters) {
       clearFilters();
     }
-    this.setState({ searchText: "" });
+    this.setState({ searchText: "", searchedSenator: "" });
   };
 
   scrollTo = (id, options) => {
@@ -110,6 +110,9 @@ class App extends Component {
   selectSenator = (senator) => {
     this.scrollTo(senator.id);
     this.openModal(senator);
+    this.setState({
+      searchedSenator: senator.displayName,
+    });
   };
 
   closeModal = () => {
@@ -159,7 +162,7 @@ class App extends Component {
                             senator.party.toLowerCase(),
                           ].join(" ")}
                           onClick={() =>
-                            this.scrollTo(senator.id, { behavior: "smooth" })
+                            this.selectSenator(senator)
                           }
                         >
                           <img
@@ -175,7 +178,9 @@ class App extends Component {
               );
             })}
           </Row>
-          {senateMapByStatus[1] && <ProgressBar senateMapByStatus={senateMapByStatus} />}
+          {senateMapByStatus[1] && (
+            <ProgressBar senateMapByStatus={senateMapByStatus} />
+          )}
           <Row className="table-container" gutter={16}>
             <SenateTable
               senators={filteredSenators}
@@ -185,6 +190,7 @@ class App extends Component {
               searchedColumn={this.state.searchedColumn}
               searchText={this.state.searchText}
               openModal={this.openModal}
+              searchedSenator={this.state.searchedSenator}
             />
             {this.renderModal()}
           </Row>
