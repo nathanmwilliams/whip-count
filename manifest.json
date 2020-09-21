@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Senate Whip Count",
+  "name": "SCOTUS Vacancy - Senate Whip Count",
   "icons": [
     {
       "src": "favicon.ico",
