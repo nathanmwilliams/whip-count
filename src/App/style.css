@@ -99,8 +99,23 @@
   opacity: .8;
 }
 
+.ant-progress-inner {
+  justify-content: flex-end;
+  display: flex;
+  border-radius: 0;
+}
+
+.half-way {
+  width: 50%;
+  border-right: black 1px solid;
+  height: 20px;
+  position: relative;
+  top: -21px;
+}
+
 @media screen and (max-width: 576px) {
   .status-container {
     display: none;
   }
 }
+

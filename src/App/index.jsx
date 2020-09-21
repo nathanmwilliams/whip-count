@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Col,
-  Row,
-  Tooltip,
-  Layout,
-} from "antd";
+import { Col, Row, Tooltip, Layout, Progress } from "antd";
 import { map, filter } from "lodash";
 
 
@@ -13,7 +8,7 @@ import { getSenatorsByStatus } from './selectors';
 import SenatorModal from "../components/Modal";
 import Search from "../components/Search";
 import './style.css';
-import { STATUS_TYPES } from '../constants';
+import { STATUS_COLORS, STATUS_TYPES } from '../constants';
 import SenateTable, { makeSortFunction } from '../components/Table';
 const { Header, Content } = Layout;
 
@@ -112,6 +107,7 @@ class App extends Component {
 
   render() {
     const senateMapByStatus = getSenatorsByStatus(this.state.senators);
+    console.log(senateMapByStatus);
     return (
       <Layout className="App">
         <Header>
@@ -160,6 +156,32 @@ class App extends Component {
               );
             })}
           </Row>
+          {senateMapByStatus[1] && (
+            <>
+              <Tooltip
+  
+              >
+                <Progress
+                  strokeColor={STATUS_COLORS[4]}
+                  showInfo={false}
+                  strokeLinecap="square"
+                  percent={senateMapByStatus[4].length}
+                  trailColor="#7a76884d"
+                  strokeWidth={12}
+                  success={{
+                    strokeLinecap: "square",
+                    strokeColor: STATUS_COLORS[1],
+                    percent:
+                      senateMapByStatus[1].length + senateMapByStatus[2].length,
+                  }}
+                  
+                />
+                <div className="half-way">
+                  
+                </div>
+              </Tooltip>
+            </>
+          )}
           <Row className="table-container" gutter={16}>
             <SenateTable
               senators={this.state.senators}

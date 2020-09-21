@@ -84,7 +84,7 @@ const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
         <div className="right-container modal-col">
           {senator.quote && renderQuote(senator.quote)}
           <Card
-            title="Contact the senator:"
+            title="Contact:"
             actions={[
               senator.socials.facebook && (
                 <a
