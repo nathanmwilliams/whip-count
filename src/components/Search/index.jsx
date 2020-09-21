@@ -2,13 +2,13 @@ import React from "react";
 import { Select } from 'antd';
 import { find } from 'lodash';
 
-import states from "../../data/states";
+// import states from "../../data/states";
 
 const { Option } = Select;
-const statesMap = states.map((state) => ({
-  id: state,
-  displayName: state,
-}))
+// const statesMap = states.map((state) => ({
+//   id: state,
+//   displayName: state,
+// }))
 
 const Search = ({ senators, selectSenator, handleStateSearch }) => {
   function onChange(value) {
