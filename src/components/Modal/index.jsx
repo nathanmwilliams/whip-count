@@ -49,7 +49,13 @@ const renderQuote = (quote) => {
     <>
       {quote.year && <p className="quote-year">Statement in {quote.year}</p>}
       <p className="quote">{quote.text}</p>
-      {quote.citation && <p className="quote-citation"><a href={quote.citation}>Link to citation</a></p>}
+      {quote.citation && (
+        <p className="quote-citation">
+          <a target="_blank" rel="noopener noreferrer" href={quote.citation}>
+            Link to citation
+          </a>
+        </p>
+      )}
     </>
   );
 }

@@ -5,31 +5,25 @@
     align-items: center;
     justify-content: space-between;
     flex-flow: row wrap;
+    background-color: #261b3b;
+
+}
+
+.ant-layout-header .ant-btn {
+  margin: 20px 0;
 }
 
 .ant-layout-header h3 {
   color: white;
+  line-height: 2;
 }
+
 .App {
   text-align: center;
 }
 
-.ant-layout-header {
-  background-color: #261b3b;
-}
-
-
 .App-link {
   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .all-status-container {
@@ -100,9 +94,6 @@
   }
   .ant-layout-header {
     justify-content: space-evenly;
-  }
-  .ant-layout-header .ant-btn {
-    margin: 20px 0;
   }
   .status-col {
     min-width: 0;

@@ -104,7 +104,7 @@ class SenateTable extends React.Component {
       ),
   });
   render() {
-    const { senators } = this.props;
+    const { senators, height } = this.props;
     return (
       <Table
         dataSource={senators}
@@ -113,7 +113,7 @@ class SenateTable extends React.Component {
         sticky
         scroll={{
           x: true,
-          y: "60vh",
+          y: this.props.height || "60vh",
         }}
       >
         <Column

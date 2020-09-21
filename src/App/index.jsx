@@ -54,6 +54,9 @@ class App extends Component {
         senators.sort(makeSortFunction("state"));
         this.setState({ senators });
       });
+
+      this.getTableHight();
+      window.addEventListener("resize", () => this.getTableHight());
   };
 
   handleStateSearch = (value) => {
@@ -62,6 +65,23 @@ class App extends Component {
       searchedColumn: "state",
     });
   };
+
+  getTableHight = () => {
+    const statusContainer = document.getElementsByClassName("all-status-container");
+    const progressBar = document.getElementsByClassName(
+      "progress-bar-container"
+    );
+    const tableHeader = document.getElementsByClassName("ant-table-thead");
+    if (statusContainer[0] && progressBar[0] && tableHeader[0]) {
+      const height =
+        statusContainer[0].scrollHeight +
+        progressBar[0].scrollHeight +
+        tableHeader[0].scrollHeight;
+      const windowHeight = window.innerHeight;
+      const tableHeight = windowHeight - height;
+      this.setState({ tableHeight });
+    }
+  }
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -161,9 +181,7 @@ class App extends Component {
                             "image-container",
                             senator.party.toLowerCase(),
                           ].join(" ")}
-                          onClick={() =>
-                            this.selectSenator(senator)
-                          }
+                          onClick={() => this.selectSenator(senator)}
                         >
                           <img
                             width={200}
@@ -191,6 +209,7 @@ class App extends Component {
               searchText={this.state.searchText}
               openModal={this.openModal}
               searchedSenator={this.state.searchedSenator}
+              height={this.state.tableHeight}
             />
             {this.renderModal()}
           </Row>
