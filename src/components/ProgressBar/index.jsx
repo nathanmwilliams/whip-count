@@ -13,6 +13,7 @@ const ProgressBar = ({senateMapByStatus}) => (
                 return (
                 //   <Popover content={senators.length} placement="topLeft">
                     <div
+                    key={`progress-${status}`}
                     style={{
                         flexBasis: `${senators.length}%`,
                         background: STATUS_COLORS_PROGRESS[status],
