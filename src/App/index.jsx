@@ -3,14 +3,10 @@ import {
   Col,
   Row,
   Popover,
-  Button,
   Layout,
-  Input,
-  Space,
 } from "antd";
 import { map, filter } from "lodash";
-import { SearchOutlined } from "@ant-design/icons";
-import Highlighter from "react-highlight-words";
+
 
 import { firestore, firebasedb } from '../utils/setup-firebase';
 import { getSenatorsByStatus } from './selectors';
@@ -26,6 +22,7 @@ class App extends Component {
   state = {
     senators: [],
     modalSenator: null,
+    searchText: "",
   };
 
   componentDidMount = () => {
@@ -55,75 +52,6 @@ class App extends Component {
         this.setState({ senators });
       });
   };
-  getSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={(node) => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() =>
-            this.handleSearch(selectedKeys, confirm, dataIndex)
-          }
-          style={{ width: 188, marginBottom: 8, display: "block" }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button
-            onClick={() => this.handleReset(clearFilters)}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Reset
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
-        : "",
-    onFilterDropdownVisibleChange: (visible) => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select(), 100);
-      }
-    },
-    render: (text) =>
-      this.state.searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-          searchWords={[this.state.searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ""}
-        />
-      ) : (
-        text
-      ),
-  });
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -139,7 +67,6 @@ class App extends Component {
   };
 
   scrollTo = (id, options) => {
-    console.log(id);
     const row = document.querySelector(`[data-row-key="${id}"]`);
     row.scrollIntoView(options);
   };
@@ -182,6 +109,7 @@ class App extends Component {
       <Layout className="App">
         <Header>
           <Search
+            handleStateSearch={this.handleSearch}
             senators={this.state.senators}
             selectSenator={this.selectSenator}
           />
@@ -233,6 +161,10 @@ class App extends Component {
             <SenateTable
               senators={this.state.senators}
               getSearchProps={this.getSearchProps}
+              handleSearch={this.handleSearch}
+              handleReset={this.handleReset}
+              searchedColumn={this.state.searchedColumn}
+              searchText={this.state.searchText}
             />
             {this.renderModal()}
           </Row>

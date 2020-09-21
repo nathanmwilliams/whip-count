@@ -1,5 +1,8 @@
 import React from "react";
-import { Table, Button, Tag } from "antd";
+import { Table, Button, Tag, Input, Space } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import Highlighter from "react-highlight-words";
+
 import { STATUS_COLORS, STATUS_DISPLAY, STATUS_TYPES } from "../../constants";
 
 const { Column } = Table;
@@ -16,8 +19,79 @@ export const makeSortFunction = (key) => {
 };
 
 class SenateTable extends React.Component {
+  getSearchProps = (dataIndex) => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={(node) => {
+            this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() =>
+            this.props.handleSearch(selectedKeys, confirm, dataIndex)
+          }
+          style={{ width: 188, marginBottom: 8, display: "block" }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() =>
+              this.props.handleSearch(selectedKeys, confirm, dataIndex)
+            }
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button
+            onClick={() => this.props.handleReset(clearFilters)}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered) => (
+      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        : "",
+    onFilterDropdownVisibleChange: (visible) => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select(), 100);
+      }
+    },
+    render: (text) =>
+      this.props.searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          searchWords={[this.props.searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ""}
+        />
+      ) : (
+        text
+      ),
+  });
   render() {
-    const { senators, getSearchProps } = this.props;
+    const { senators } = this.props;
     return (
       <Table
         dataSource={senators}
@@ -37,7 +111,7 @@ class SenateTable extends React.Component {
           sorter={makeSortFunction("last_name")}
         />
         <Column
-          {...getSearchProps("state")}
+          {...this.getSearchProps("state")}
           title="State"
           dataIndex="state"
           width={100}
@@ -56,7 +130,6 @@ class SenateTable extends React.Component {
           key="status"
           filters={STATUS_DISPLAY}
           onFilter={(value, record) => {
-            console.log(record, value);
             return record.status.includes(value);
           }}
           sorter={makeSortFunction("status")}
