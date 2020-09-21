@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import {
   Col,
   Row,
-  Table,
   Popover,
   Button,
-  Tag,
   Layout,
   Input,
   Space,
@@ -16,25 +14,13 @@ import Highlighter from "react-highlight-words";
 
 import { firestore, firebasedb } from '../utils/setup-firebase';
 import { getSenatorsByStatus } from './selectors';
-import SenatorModal from "../Modal";
-import Search from "../Search";
+import SenatorModal from "../components/Modal";
+import Search from "../components/Search";
 import './style.css';
-import { STATUS_COLORS, STATUS_DISPLAY, STATUS_TYPES } from '../constants';
-const { Column } = Table;
+import { STATUS_TYPES } from '../constants';
+import SenateTable, { makeSortFunction } from '../components/Table';
 const { Header, Content } = Layout;
 
-const makeSortFunction = (key) => {
-  return (a, b) => {
-        if (a[key] > b[key]) {
-            return 1;
-          }
-          if (a[key] < b[key]) {
-            return -1;
-          }
-          return 0;
-        }
-
-}
 
 class App extends Component {
   state = {
@@ -232,6 +218,7 @@ class App extends Component {
                         >
                           <img
                             width={200}
+                            alt={`${senator.displayName}`}
                             src={`https://www.govtrack.us/static/legislator-photos/${senator.govtrack_id}-100px.jpeg`}
                           />
                         </div>
@@ -243,72 +230,10 @@ class App extends Component {
             })}
           </Row>
           <Row className="table-container" gutter={16}>
-            <Table
-              dataSource={this.state.senators}
-              rowKey="id"
-              pagination={false}
-              sticky
-              scroll={{
-                x: true,
-                y: "60vh",
-              }}
-            >
-              <Column
-                title="First Name"
-                dataIndex="first_name"
-                key="first_name"
-              />
-              <Column
-                title="Last Name"
-                dataIndex="last_name"
-                key="last_name"
-                sorter={makeSortFunction("last_name")}
-              />
-              <Column
-                {...this.getSearchProps("state", this.state)}
-                title="State"
-                dataIndex="state"
-                key="state"
-                sorter={makeSortFunction("state")}
-              />
-              <Column
-                title="Party"
-                dataIndex="party"
-                key="party"
-                sorter={makeSortFunction("party")}
-              />
-              <Column
-                title="Status"
-                dataIndex="status"
-                key="status"
-                filters={STATUS_DISPLAY}
-                onFilter={(value, record) => {
-                  console.log(record, value);
-                  return record.status.includes(value);
-                }}
-                sorter={makeSortFunction("status")}
-                render={(id) => {
-                  return (
-                    <Tag color={STATUS_COLORS[id]} key={id}>
-                      {STATUS_TYPES[id]}
-                    </Tag>
-                  );
-                }}
-              />
-              <Column
-                title="See More"
-                key="see-more"
-                render={(record) => {
-                  return (
-                    <>
-                      <Button onClick={() => this.openModal(record)}>
-                        Details
-                      </Button>
-                    </>
-                  );
-                }}
-              />
-            </Table>
+            <SenateTable
+              senators={this.state.senators}
+              getSearchProps={this.getSearchProps}
+            />
             {this.renderModal()}
           </Row>
         </Content>

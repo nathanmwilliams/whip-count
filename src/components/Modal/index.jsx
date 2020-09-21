@@ -5,7 +5,7 @@ import {
   TwitterOutlined,
   LinkOutlined,
 } from "@ant-design/icons";
-import { STATUS_TYPES } from "../constants";
+import { STATUS_TYPES } from "../../constants";
 import "./style.css";
 
 const { Meta } = Card;
