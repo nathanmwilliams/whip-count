@@ -45,10 +45,9 @@ const townHallsDisplay = (townHalls) => (
 );
 
 const renderQuote = (quote) => {
-  console.log(quote)
   return (
     <>
-      {quote && <p className="quote-year">Statement in {quote.year}</p>}
+      {quote.year && <p className="quote-year">Statement in {quote.year}</p>}
       <p className="quote">{quote.text}</p>
       {quote.citation && <p className="quote-citation"><a href={quote.citation}>Link to citation</a></p>}
     </>
