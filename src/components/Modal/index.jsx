@@ -63,13 +63,14 @@ const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
       onOk={closeModal}
       onCancel={closeModal}
       footer={null}
+    
     >
       <div className="modal-row">
         <div className="left-container modal-col">
           <Card
             style={{ maxWidth: 200 }}
             bordered={false}
-            className={`status__${senator.status}`}
+            className={`status__${senator.status} photo-card`}
             cover={
               <img
                 alt="example"

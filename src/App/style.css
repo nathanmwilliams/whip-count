@@ -2,6 +2,9 @@
   text-align: center;
 }
 
+.ant-layout-header {
+  background-color: #261b3b;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -106,4 +109,10 @@ th.ant-table-cell {
 
 .ant-row.table-container {
   margin: 0!important;
+}
+
+@media screen and (max-width: 576px) {
+  .status-container {
+    display: none;
+  }
 }

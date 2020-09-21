@@ -8,8 +8,8 @@
 
 .modal-row .ant-card {
         box-shadow: 0 0 1px 1px #b0afb07d;
-
 }
+
 .modal-col {
     padding: 8px;
 }
@@ -67,4 +67,19 @@
 
 .quote-citation {
     text-align: right;
+}
+
+@media screen and (max-width: 576px) {
+    .modal-col {
+        flex: 1 1 100%;
+    }
+    .modal-row {
+        flex-flow: row wrap;
+    }
+    .photo-card {
+        margin: auto;
+    }
+    .ant-tag {
+        white-space: initial!important;
+    }
 }
