@@ -57,7 +57,7 @@ const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
       <div className="modal-row">
         <div className="left-container modal-col">
           <Card
-            // style={{ maxWidth: 240 }}
+            style={{ maxWidth: 200 }}
             bordered={false}
             className={`status__${senator.status}`}
             cover={
@@ -97,7 +97,7 @@ const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href={senator.socials.urls}
+                  href={senator.socials.url}
                 >
                   <LinkOutlined />
                 </a>

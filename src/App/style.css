@@ -39,12 +39,33 @@
 
 .all-status-container {
   flex-flow: row nowrap;
+  background: #f0f0f0;
 }
 .status-col {
   display: flex;
+  border-left: 0.5px solid #d9d9d9;
   flex-flow: column;
   justify-content: space-between;
+  padding: 8px;
 }
+
+
+.status__1.status-col h3{
+  color: #5e3c99
+}
+
+.status__2.status-col h3{
+  color: #b2abd2
+}
+
+.status__3.status-col h3{
+  color: #7a7688
+}
+
+.status__4.status-col h3{
+  color: #e66101
+}
+
 .status-container {
   display: flex;
   flex-flow: row wrap;

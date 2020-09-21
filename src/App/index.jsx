@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { Col, Row, Table, Popover, Button } from "antd";
-import { map, filter, find } from "lodash";
+import { Col, Row, Table, Popover, Button, Tag, Layout } from "antd";
+import { map, filter } from "lodash";
 
 import { firestore, firebasedb } from '../utils/setup-firebase';
 import { getSenatorsByStatus } from './selectors';
 import SenatorModal from "../Modal";
+import Search from "../Search";
 import './style.css';
-import { STATUS_DISPLAY, STATUS_TYPES } from '../constants';
+import { STATUS_COLORS, STATUS_DISPLAY, STATUS_TYPES } from '../constants';
 
-const { Column, ColumnGroup } = Table;
-
-
+const { Column } = Table;
+const { Header, Content } = Layout;
 
 const makeSortFunction = (key) => {
   return (a, b) => {
@@ -59,10 +59,10 @@ class App extends Component {
       });
   };
 
-  scrollTo = (id) => {
+  scrollTo = (id, options) => {
     console.log(id);
     const row = document.querySelector(`[data-row-key="${id}"]`);
-    row.scrollIntoView({ behavior: "smooth" });
+    row.scrollIntoView(options);
   };
 
   renderModal = () => {
@@ -83,6 +83,13 @@ class App extends Component {
     );
   };
 
+  selectSenator = (senator) => {
+    this.scrollTo(senator.id);
+
+      this.openModal(senator)
+   
+  }
+
   openModal = (senator) => {
     this.setState({ modalSenator: senator });
   };
@@ -94,14 +101,20 @@ class App extends Component {
   render() {
     const senateMapByStatus = getSenatorsByStatus(this.state.senators);
     return (
-      <div className="App">
-        <div className="team">
-          <h1>Whip Count</h1>
+      <Layout className="App">
+          <Header>
+          <Search senators={this.state.senators} selectSenator={this.selectSenator} />
+          </Header>
+        <Content className="team">
           <Row className="all-status-container">
             {map(senateMapByStatus, (senators, statusNo) => {
               return (
-                <Col flex={"1 1 auto"} className="status-col">
-                  <h4>{STATUS_TYPES[statusNo]}</h4>
+                <Col
+                  key={statusNo}
+                  flex={"1 1 auto"}
+                  className={`status-col status__${statusNo}`}
+                >
+                  <h3>{`${STATUS_TYPES[statusNo]} (${senators.length})`}</h3>
                   <div className="status-container">
                     {map(senators, (senator) => (
                       <Popover
@@ -118,7 +131,9 @@ class App extends Component {
                             "image-container",
                             senator.party.toLowerCase(),
                           ].join(" ")}
-                          onClick={() => this.scrollTo(senator.id)}
+                          onClick={() =>
+                            this.scrollTo(senator.id, { behavior: "smooth" })
+                          }
                         >
                           <img
                             width={200}
@@ -172,12 +187,16 @@ class App extends Component {
                 key="status"
                 filters={STATUS_DISPLAY}
                 onFilter={(value, record) => {
-                  console.log(record, value)
-                  return record.status.includes(value)
+                  console.log(record, value);
+                  return record.status.includes(value);
                 }}
                 sorter={makeSortFunction("status")}
                 render={(id) => {
-                  return (STATUS_TYPES[id])
+                  return (
+                    <Tag color={STATUS_COLORS[id]} key={id}>
+                      {STATUS_TYPES[id]}
+                    </Tag>
+                  );
                 }}
               />
               <Column
@@ -186,11 +205,7 @@ class App extends Component {
                 render={(record) => {
                   return (
                     <>
-                      <Button
-                        onClick={() =>
-                          this.openModal(record)
-                        }
-                      >
+                      <Button onClick={() => this.openModal(record)}>
                         Details
                       </Button>
                     </>
@@ -200,8 +215,8 @@ class App extends Component {
             </Table>
             {this.renderModal()}
           </Row>
-        </div>
-      </div>
+        </Content>
+      </Layout>
     );
   }
 }

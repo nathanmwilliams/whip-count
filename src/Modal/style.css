@@ -33,7 +33,7 @@
     background-color: #b2abd2
 }
 
-.status__3 {
+.status__3 .ant-card-body {
     background-color: #7a7688
 }
 
