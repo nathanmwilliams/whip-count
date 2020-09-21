@@ -1,3 +1,5 @@
+import { filter } from "lodash"; 
+
 export const getSenatorsByStatus = (allSenators) => (
     allSenators.reduce((acc, cur) => {
         const statusKey = cur.status
@@ -9,3 +11,12 @@ export const getSenatorsByStatus = (allSenators) => (
         return acc;
     }, {})
 )
+
+
+
+export const getFilteredSenators = (allSenators, filterKey, filterValue) => {
+    if (filterKey && filterValue) {
+        return filter(allSenators, (senator) => senator[filterKey].toLowerCase() === filterValue)
+    }
+    return allSenators;
+}

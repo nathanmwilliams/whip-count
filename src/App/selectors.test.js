@@ -1,24 +1,32 @@
-import { getAvailableDogs } from './selectors';
+import {
+    getSenatorsByStatus,
+    getFilteredSenators
+} from './selectors';
 
-const mockListOfDogs = [
-    {name: 'doggo 1', tags: ["tag 1"]},
-    {name: 'doggo 2', tags: ["tag 2"]}
+const mockSenators = [
+    {name: 'senator 1', status: "1"},
+    {name: 'senator 2', status: "2"}
 ]
 
-describe('getAvailableDogs', () => {
+describe('getSenatorsByStatus', () => {
     
-    test('it returns all dogs if no filters are selected', () => {
-        const selectedFilters = [];
-        expect(getAvailableDogs(mockListOfDogs).length).toEqual(mockListOfDogs.length)
+    test('it senators as a object mapped by status', () => {
+        const mappedSenators = getSenatorsByStatus(mockSenators)
+        expect(mappedSenators[1].length).toEqual(1)
+        expect(mappedSenators[2].length).toEqual(1)
 
     })
-    test('if a filter is selected, only returns dogs with that filter in their tags list', () => {
-        const selectedFilters = ['tag 1'];
+    test('if a filter is selected, only returns senators with that filter value', () => {
+        const filterKey = "status";
+        const filerValue = "1"
+        const filtered = getFilteredSenators(mockSenators, filterKey, filerValue);
+        expect(filtered.length).toEqual(1);
 
     })
-    test('if more than one filter is selected, only returns dogs with either of the filters in their tag list', () => {
-        const selectedFilters = ['tag 1', 'tag 2'];
-
-
+    test('no filter, return whole list', () => {
+        const filterKey = "";
+        const filerValue = "1"
+        const filtered = getFilteredSenators(mockSenators, filterKey, filerValue);
+        expect(filtered.length).toEqual(mockSenators.length);
     })
 })

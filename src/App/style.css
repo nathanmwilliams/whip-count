@@ -1,3 +1,15 @@
+.ant-layout-header{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ant-layout-header h3 {
+
+
+  color: white;
+}
 .App {
   text-align: center;
 }

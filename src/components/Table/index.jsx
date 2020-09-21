@@ -19,7 +19,6 @@ export const makeSortFunction = (key) => {
   };
 };
 
-const MD_BREAKPOINT = 768;
 class SenateTable extends React.Component {
   constructor(props) {
     super(props);
@@ -140,7 +139,7 @@ class SenateTable extends React.Component {
           responsive={["md"]}
         />
         <Column
-          title="Status"
+          title="Position"
           dataIndex="status"
           key="status"
           filters={STATUS_DISPLAY}

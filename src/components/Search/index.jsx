@@ -1,22 +1,31 @@
 import React from "react";
-import { Select } from 'antd';
-import { find } from 'lodash';
+import { Select } from "antd";
+import { find, map } from "lodash";
+import { SearchOutlined } from "@ant-design/icons";
 
-// import states from "../../data/states";
+import states, { statesAb } from "../../data/states";
 
 const { Option } = Select;
-// const statesMap = states.map((state) => ({
-//   id: state,
-//   displayName: state,
-// }))
+const statesMap = map(statesAb, (stateName, abr) => ({
+  id: abr,
+  displayName: stateName,
+}));
 
-const Search = ({ senators, selectSenator, handleStateSearch }) => {
+const Search = ({
+  senators,
+  selectSenator,
+  handleStateSearch,
+  handleReset,
+}) => {
   function onChange(value) {
+    const isState = states.includes(value);
+    if (isState) {
+      handleStateSearch(value);
+    }
     const senator = find(senators, { id: value });
     if (senator) {
       selectSenator(senator);
     }
- 
   }
 
   function onBlur() {
@@ -31,24 +40,35 @@ const Search = ({ senators, selectSenator, handleStateSearch }) => {
     //   console.log('search:', val);
   }
   return (
-    <Select
-      showSearch
-      style={{ width: 200 }}
-      placeholder="Search for your Senator"
-      optionFilterProp="children"
-      onChange={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      onSearch={onSearch}
-      filterOption={(input, option) =>
-        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-      }
-    >
-      {senators.map((senatorOrState) => (
-        <Option key={senatorOrState.id}>{senatorOrState.displayName}</Option>
-      ))}
-    </Select>
+    <>
+      <h3>Where does your Senator stand?</h3>
+
+      <Select
+        showSearch
+        style={{ width: 300 }}
+        allowClear
+        showArrow={false}
+        suffixIcon={<SearchOutlined />}
+        placeholder="Search Senator's name or state"
+        optionFilterProp="children"
+        onChange={onChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onSearch={onSearch}
+        onClear={handleReset}
+        filterOption={(input, option) => {
+          return (
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+            option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          );
+        }}
+      >
+        {[...senators, ...statesMap].map((senatorOrState) => (
+          <Option key={senatorOrState.id}>{senatorOrState.displayName}</Option>
+        ))}
+      </Select>
+    </>
   );
 };
 
-  export default Search;
+export default Search;

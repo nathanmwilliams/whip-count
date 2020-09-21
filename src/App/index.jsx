@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Col, Row, Tooltip, Layout, Progress } from "antd";
+import { Col, Row, Tooltip, Layout, Progress, Button } from "antd";
 import { map, filter } from "lodash";
 
 
 import { firestore, firebasedb } from '../utils/setup-firebase';
-import { getSenatorsByStatus } from './selectors';
+import { getFilteredSenators, getSenatorsByStatus } from './selectors';
 import SenatorModal from "../components/Modal";
 import Search from "../components/Search";
 import './style.css';
@@ -24,6 +24,7 @@ class App extends Component {
     senators: [],
     modalSenator: null,
     searchText: "",
+    searchedColumn: "",
   };
 
   componentDidMount = () => {
@@ -54,6 +55,13 @@ class App extends Component {
       });
   };
 
+  handleStateSearch = (value) => {
+    this.setState({
+      searchText: value,
+      searchedColumn: "state",
+    });
+  };
+
   handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     this.setState({
@@ -63,13 +71,17 @@ class App extends Component {
   };
 
   handleReset = (clearFilters) => {
-    clearFilters();
+    if (clearFilters) {
+      clearFilters();
+    }
     this.setState({ searchText: "" });
   };
 
   scrollTo = (id, options) => {
     const row = document.querySelector(`[data-row-key="${id}"]`);
-    row.scrollIntoView(options);
+    if (row) {
+      row.scrollIntoView(options);
+    }
   };
 
   renderModal = () => {
@@ -96,10 +108,8 @@ class App extends Component {
 
   selectSenator = (senator) => {
     this.scrollTo(senator.id);
-
     this.openModal(senator);
   };
-
 
   closeModal = () => {
     this.setState({ modalSenator: null });
@@ -107,15 +117,19 @@ class App extends Component {
 
   render() {
     const senateMapByStatus = getSenatorsByStatus(this.state.senators);
-    console.log(senateMapByStatus);
+    const filteredSenators = getFilteredSenators(this.state.senators, this.state.searchedColumn, this.state.searchText);
     return (
       <Layout className="App">
         <Header>
           <Search
-            handleStateSearch={this.handleSearch}
+            handleStateSearch={this.handleStateSearch}
             senators={this.state.senators}
             selectSenator={this.selectSenator}
+            handleReset={this.handleReset}
           />
+          <Button ghost>
+            Submit position update
+          </Button>
         </Header>
         <Content className="team">
           <Row className="all-status-container">
@@ -158,9 +172,7 @@ class App extends Component {
           </Row>
           {senateMapByStatus[1] && (
             <>
-              <Tooltip
-  
-              >
+              <Tooltip>
                 <Progress
                   strokeColor={STATUS_COLORS[4]}
                   showInfo={false}
@@ -174,17 +186,14 @@ class App extends Component {
                     percent:
                       senateMapByStatus[1].length + senateMapByStatus[2].length,
                   }}
-                  
                 />
-                <div className="half-way">
-                  
-                </div>
+                <div className="half-way"></div>
               </Tooltip>
             </>
           )}
           <Row className="table-container" gutter={16}>
             <SenateTable
-              senators={this.state.senators}
+              senators={filteredSenators}
               getSearchProps={this.getSearchProps}
               handleSearch={this.handleSearch}
               handleReset={this.handleReset}
