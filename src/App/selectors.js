@@ -16,7 +16,10 @@ export const getSenatorsByStatus = (allSenators) => (
 
 export const getFilteredSenators = (allSenators, filterKey, filterValue) => {
     if (filterKey && filterValue) {
-        return filter(allSenators, (senator) => senator[filterKey].toLowerCase() === filterValue)
+        return filter(allSenators, (senator) => {
+            return senator[filterKey].toLowerCase() === filterValue.toLowerCase()
+        })
+        
     }
     return allSenators;
 }
