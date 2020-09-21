@@ -60,7 +60,7 @@
 .status-container {
   display: flex;
   flex-flow: row wrap;
-  margin: 10px;
+  margin: 5px; 
 }
 
 .image-container {
