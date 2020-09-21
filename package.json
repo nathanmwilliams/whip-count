@@ -2,7 +2,7 @@
   "name": "dog-team-picker",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://meganrm.github.io/whip-count",
+  "homepage": "https://townhallproject.github.io/whip-count",
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
     "@testing-library/jest-dom": "^4.2.4",
