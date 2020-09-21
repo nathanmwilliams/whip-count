@@ -8,7 +8,7 @@ import { getFilteredSenators, getSenatorsByStatus } from './selectors';
 import SenatorModal from "../components/Modal";
 import Search from "../components/Search";
 import './style.css';
-import { STATUS_COLORS, STATUS_TYPES } from '../constants';
+import { SHORT_STATUS_TYPES, STATUS_COLORS } from '../constants';
 import SenateTable, { makeSortFunction } from '../components/Table';
 const { Header, Content } = Layout;
 
@@ -144,7 +144,7 @@ class App extends Component {
                   flex={"1 1 auto"}
                   className={`status-col status__${statusNo}`}
                 >
-                  <h3>{`${STATUS_TYPES[statusNo]} (${senators.length})`}</h3>
+                  <h3>{`${SHORT_STATUS_TYPES[statusNo]} (${senators.length})`}</h3>
                   <div className="status-container">
                     {map(senators, (senator) => (
                       <Tooltip
@@ -182,7 +182,7 @@ class App extends Component {
                   showInfo={false}
                   strokeLinecap="square"
                   percent={senateMapByStatus[4].length}
-                  trailColor="#7a76884d"
+                  trailColor="#7f7f7f4d"
                   strokeWidth={12}
                   success={{
                     strokeLinecap: "square",

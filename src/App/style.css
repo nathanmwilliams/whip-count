@@ -65,6 +65,7 @@
   flex-flow: column;
   justify-content: space-between;
   padding: 8px;
+  min-width: 130px;
 }
 
 
