@@ -147,7 +147,7 @@ class SenateTable extends React.Component {
           render={(record) => {
             return (
               <>
-                <Button onClick={() => this.openModal(record)}>Details</Button>
+                <Button onClick={() => this.props.openModal(record)}>Details</Button>
               </>
             );
           }}

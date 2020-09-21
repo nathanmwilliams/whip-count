@@ -89,15 +89,16 @@ class App extends Component {
     );
   };
 
+  openModal = (senator) => {
+    this.setState({ modalSenator: senator });
+  };
+
   selectSenator = (senator) => {
     this.scrollTo(senator.id);
 
     this.openModal(senator);
   };
 
-  openModal = (senator) => {
-    this.setState({ modalSenator: senator });
-  };
 
   closeModal = () => {
     this.setState({ modalSenator: null });
@@ -165,6 +166,7 @@ class App extends Component {
               handleReset={this.handleReset}
               searchedColumn={this.state.searchedColumn}
               searchText={this.state.searchText}
+              openModal={this.openModal}
             />
             {this.renderModal()}
           </Row>
