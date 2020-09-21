@@ -4,6 +4,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 
 import { STATUS_COLORS, STATUS_DISPLAY, STATUS_TYPES } from "../../constants";
+import "./style.css";
 
 const { Column } = Table;
 export const makeSortFunction = (key) => {
@@ -116,23 +117,12 @@ class SenateTable extends React.Component {
           y: "60vh",
         }}
       >
-        {this.state.width < MD_BREAKPOINT ? (
-          <Column title="Name" dataIndex="displayName" key="displayName" />
-        ) : (
-          <>
-            <Column
-              title="First Name"
-              dataIndex="first_name"
-              key="first_name"
-            />
-            <Column
-              title="Last Name"
-              dataIndex="last_name"
-              key="last_name"
-              sorter={makeSortFunction("last_name")}
-            />
-          </>
-        )}
+        <Column
+        title="Name"
+        dataIndex="displayName"
+        key="displayName"
+        sorter={makeSortFunction("last_name")}
+        />
         <Column
           {...this.getSearchProps("state")}
           title="State"

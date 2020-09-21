@@ -1,0 +1,17 @@
+.ant-table-thead tr th.ant-table-column-has-sorters .ant-table-filter-column {
+    margin: -16px -16px;
+}
+
+th.ant-table-cell,
+th.ant-table-cell {
+    padding: 8px !important;
+}
+
+.ant-dropdown-trigger.ant-table-filter-trigger {
+    color: #7f48f3;
+    font-size: 14px;
+}
+
+.ant-row.table-container {
+    margin: 0 !important;
+}

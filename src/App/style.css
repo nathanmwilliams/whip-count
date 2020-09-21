@@ -44,6 +44,7 @@
   flex-flow: row nowrap;
   background: #f0f0f0;
 }
+
 .status-col {
   display: flex;
   border-left: 0.5px solid #d9d9d9;
@@ -76,7 +77,7 @@
 }
 
 .image-container {
-  width: 24px;
+  width: 30px;
   cursor: pointer;
 }
 
@@ -96,19 +97,6 @@
   height: auto;
   filter: grayscale(1);
   opacity: .8;
-}
-th.ant-table-cell,
-th.ant-table-cell {
-  padding: 8px!important;
-}
-
-.ant-dropdown-trigger.ant-table-filter-trigger {
-  color: #7f48f3;
-  font-size: 14px;
-}
-
-.ant-row.table-container {
-  margin: 0!important;
 }
 
 @media screen and (max-width: 576px) {
