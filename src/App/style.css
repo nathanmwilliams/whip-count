@@ -45,9 +45,14 @@ h1{
   color: #261b3b;
 }
 .ant-layout-header .search-label {
-  color: white;
+  color: #ffffffd9;
   line-height: 2;
   font-weight: 600;
+}
+
+.ant-layout-header .ant-btn-background-ghost {
+  border-color: #ffffffd9;
+  color: #ffffffd9;
 }
 
 .App-link {
