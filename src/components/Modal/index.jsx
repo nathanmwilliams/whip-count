@@ -16,15 +16,17 @@ const townHallsDisplay = (townHalls) => (
       itemLayout="vertical"
       dataSource={townHalls}
       renderItem={(item) => {
-          console.log(item)
           return (
             <List.Item
               extra={
-                item.link
-                  ? (<a href={item.link}>{item.linkName || "More info"}</a>)
-                  : []
+                item.link ? (
+                  <a href={item.link} target="_blank" rel="noopener noreferrer">
+                    {item.linkName || "More info"}
+                  </a>
+                ) : (
+                  []
+                )
               }
-  
             >
               <List.Item.Meta
                 title={
