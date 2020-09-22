@@ -144,6 +144,9 @@ class App extends Component {
     const filteredSenators = getFilteredSenators(this.state.senators, this.state.searchedColumn, this.state.searchText);
     return (
       <Layout className="App">
+        <div className="title-bar">
+          <h1>SCOTUS Vacancy - Senate Whip Count</h1>
+        </div>
         <Header>
           <Search
             handleStateSearch={this.handleStateSearch}

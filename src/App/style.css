@@ -1,3 +1,21 @@
+.App {
+  font-family: 'Montserrat',
+  sans-serif;
+  text-align: center;
+
+}
+.App h1,
+h2 {
+  font-family: 'Anton',
+    sans-serif;
+
+}
+
+.App h1{
+  font-size: 34px;
+
+}
+
 .ant-layout-header{
     min-height: 64px;
     height: fit-content;
@@ -13,13 +31,22 @@
   margin: 20px 0;
 }
 
+.title-bar {
+  min-height: 118px;
+  background-image: url('./header.png');
+  background-size: cover;
+  background-position-x: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.title-bar h1 {
+  color: white;
+}
 .ant-layout-header h3 {
   color: white;
   line-height: 2;
-}
-
-.App {
-  text-align: center;
 }
 
 .App-link {

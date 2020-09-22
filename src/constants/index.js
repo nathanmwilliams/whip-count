@@ -9,7 +9,7 @@ export const STATUS_TYPES_LIST = [
 
 export const SHORT_STATUS_TYPES_LIST = [
     "Wait until 2021",
-    "Wait until after Election",
+    "Wait until after election",
     "Not yet on record",
     "Consider nominee now",
     "Other",
