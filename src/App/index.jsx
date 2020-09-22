@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Col, Row, Tooltip, Layout, Button } from "antd";
+import { Col, Row, Tooltip, Layout, Button, Image } from "antd";
 import { map, filter } from "lodash";
-
 
 import { firestore, firebasedb } from '../utils/setup-firebase';
 import { getFilteredSenators, getSenatorsByStatus } from './selectors';
@@ -57,9 +56,11 @@ class App extends Component {
         });
         senators.sort(makeSortFunction("state"));
         this.setState({ senators });
-      });
+      }).then(() => {
+        this.getTableHight();
 
-      this.getTableHight();
+      });
+ 
       window.addEventListener("resize", () => this.getTableHight());
   };
 
@@ -152,7 +153,6 @@ class App extends Component {
       <Layout className="App">
         <div className="title-bar">
           <h1>SCOTUS Vacancy - Senate Whip Count</h1>
-          
         </div>
         <Header>
           <Search
@@ -193,9 +193,9 @@ class App extends Component {
                           ].join(" ")}
                           onClick={() => this.selectSenator(senator)}
                         >
-                          <img
-                            width={200}
-                            alt={`${senator.displayName}`}
+                          <Image
+                            preview={false}
+                            alt={senator.displayName}
                             src={`https://www.govtrack.us/static/legislator-photos/${senator.govtrack_id}-100px.jpeg`}
                           />
                         </div>
@@ -207,7 +207,9 @@ class App extends Component {
             })}
           </Row>
           {senateMapByStatus[1] && (
-            <ProgressBar senateMapByStatus={senateMapByStatus} />
+            <ProgressBar
+              senateMapByStatus={senateMapByStatus}
+            />
           )}
           <Row className="table-container" gutter={16}>
             <SenateTable
@@ -220,6 +222,7 @@ class App extends Component {
               openModal={this.openModal}
               searchedSenator={this.state.searchedSenator}
               height={this.state.tableHeight}
+              getTableHight={this.getTableHight}
             />
             {this.renderModal()}
           </Row>
@@ -231,7 +234,9 @@ class App extends Component {
             <img className="logo" alt="indivisible" src={indivisibleLogo} />
           </div>
           <div>
-            <Button href="mailto:info@townhallproject.com" type="primary">Contact</Button>
+            <Button href="mailto:info@townhallproject.com" type="primary">
+              Contact
+            </Button>
           </div>
         </Footer>
       </Layout>
