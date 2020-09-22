@@ -207,9 +207,7 @@ class App extends Component {
             })}
           </Row>
           {senateMapByStatus[1] && (
-            <ProgressBar
-              senateMapByStatus={senateMapByStatus}
-            />
+            <ProgressBar senateMapByStatus={senateMapByStatus} />
           )}
           <Row className="table-container" gutter={16}>
             <SenateTable
@@ -230,8 +228,13 @@ class App extends Component {
         <Footer>
           <div>
             A joint project of{" "}
-            <img className="logo" alt="town hall project" src={thpLogo} /> and{" "}
-            <img className="logo" alt="indivisible" src={indivisibleLogo} />
+            <a href="https://townhallproject.com" target="_blank" rel="noopener noreferrer" >
+              <img className="logo" alt="town hall project" src={thpLogo} />
+            </a>{" "}
+            and{" "}
+            <a href="https://savescotus.indivisible.org/" target="_blank" rel="noopener noreferrer" >
+              <img className="logo" alt="indivisible" src={indivisibleLogo} />
+            </a>
           </div>
           <div>
             <Button href="mailto:info@townhallproject.com" type="primary">
