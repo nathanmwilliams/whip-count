@@ -19,6 +19,8 @@ export const makeSortFunction = (key) => {
   };
 };
 
+const MD_BREAKPOINT = 768;
+
 class SenateTable extends React.Component {
   constructor(props) {
     super(props);
@@ -27,9 +29,9 @@ class SenateTable extends React.Component {
     };
   }
   componentDidMount() {
-    this.setState({ width: window.innerWidth });
+    this.setState({ windowWidth: window.innerWidth });
     window.addEventListener("resize", () => {
-      this.setState({ width: window.innerWidth });
+      this.setState({ windowWidth: window.innerWidth });
     });
   }
   getSearchProps = (dataIndex) => ({
@@ -113,7 +115,7 @@ class SenateTable extends React.Component {
         sticky
         scroll={{
           x: true,
-          y: this.props.height || "60vh",
+          y: height || "60vh",
         }}
       >
         <Column
@@ -121,16 +123,20 @@ class SenateTable extends React.Component {
           dataIndex="displayName"
           key="displayName"
           sorter={makeSortFunction("last_name")}
-          render={(text) => {
+          render={(text, record) => {
+            const name =
+              this.state.windowWidth < MD_BREAKPOINT
+                ? `${record.displayName} (${record.party[0]}) ${record.state}`
+                : text;
             return this.props.searchedSenator === text ? (
               <Highlighter
                 highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
                 searchWords={[this.props.searchedSenator]}
                 autoEscape
-                textToHighlight={text ? text.toString() : ""}
+                textToHighlight={name ? text.toString() : ""}
               />
             ) : (
-              text
+              name
             );
           }}
         />
