@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Card, Row, Col, List } from "antd";
+import { Modal, Card, List } from "antd";
 import {
   FacebookOutlined,
   TwitterOutlined,

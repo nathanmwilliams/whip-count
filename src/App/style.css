@@ -112,7 +112,7 @@ h1{
 .image-container.independent {
   background-color: purple;
 }
-.image-container img {
+.image-container .ant-image img {
   width: 100%;
   height: auto;
   filter: grayscale(1);
