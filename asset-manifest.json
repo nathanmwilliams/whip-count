@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.5961a007.chunk.css",
+    "main.css": "/static/css/main.f1963bd6.chunk.css",
     "main.js": "/static/js/main.d35d876d.chunk.js",
     "main.js.map": "/static/js/main.d35d876d.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.a3afca20.js",
@@ -9,10 +9,10 @@
     "static/js/2.d994cb87.chunk.js": "/static/js/2.d994cb87.chunk.js",
     "static/js/2.d994cb87.chunk.js.map": "/static/js/2.d994cb87.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.03928e52451e7e8f42e1cc440f68c25c.js": "/precache-manifest.03928e52451e7e8f42e1cc440f68c25c.js",
+    "precache-manifest.4c469a2fbe261896d42066a17ef79d78.js": "/precache-manifest.4c469a2fbe261896d42066a17ef79d78.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.816e38e1.chunk.css.map": "/static/css/2.816e38e1.chunk.css.map",
-    "static/css/main.5961a007.chunk.css.map": "/static/css/main.5961a007.chunk.css.map",
+    "static/css/main.f1963bd6.chunk.css.map": "/static/css/main.f1963bd6.chunk.css.map",
     "static/js/2.d994cb87.chunk.js.LICENSE.txt": "/static/js/2.d994cb87.chunk.js.LICENSE.txt",
     "static/media/style.css": "/static/media/header.d4d389b4.png",
     "static/media/indivisible-logo.png": "/static/media/indivisible-logo.aab33f8a.png",
@@ -22,7 +22,7 @@
     "static/js/runtime-main.a3afca20.js",
     "static/css/2.816e38e1.chunk.css",
     "static/js/2.d994cb87.chunk.js",
-    "static/css/main.5961a007.chunk.css",
+    "static/css/main.f1963bd6.chunk.css",
     "static/js/main.d35d876d.chunk.js"
   ]
 }
