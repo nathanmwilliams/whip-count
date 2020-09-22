@@ -11,7 +11,11 @@ import './style.css';
 import { SHORT_STATUS_TYPES } from '../constants';
 import SenateTable, { makeSortFunction } from '../components/Table';
 import ProgressBar from "../components/ProgressBar";
-const { Header, Content } = Layout;
+
+import thpLogo from '../thp-logo.png';
+import indivisibleLogo from "../indivisible-logo.png";
+
+const { Header, Content, Footer } = Layout;
 
 const tooltipPlacement = {
   1: "right",
@@ -68,14 +72,16 @@ class App extends Component {
 
   getTableHight = () => {
     const statusContainer = document.getElementsByClassName("all-status-container");
+    const footer = document.getElementsByClassName("ant-layout-footer");
     const progressBar = document.getElementsByClassName(
       "progress-bar-container"
     );
     const tableHeader = document.getElementsByClassName("ant-table-thead");
-    if (statusContainer[0] && progressBar[0] && tableHeader[0]) {
+    if (statusContainer[0] && progressBar[0] && tableHeader[0] && footer[0]) {
       const height =
         statusContainer[0].scrollHeight +
         progressBar[0].scrollHeight +
+        footer[0].scrollHeight +
         tableHeader[0].scrollHeight;
       const windowHeight = window.innerHeight;
       const tableHeight = windowHeight - height;
@@ -217,6 +223,16 @@ class App extends Component {
             {this.renderModal()}
           </Row>
         </Content>
+        <Footer>
+          <div>
+            A joint project of{" "}
+            <img className="logo" alt="town hall project" src={thpLogo} /> and{" "}
+            <img className="logo" alt="indivisible" src={indivisibleLogo} />
+          </div>
+          <div>
+            <Button href="mailto:info@townhallproject.com" type="primary">Contact</Button>
+          </div>
+        </Footer>
       </Layout>
     );
   }

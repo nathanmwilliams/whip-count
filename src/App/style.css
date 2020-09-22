@@ -112,8 +112,16 @@ h2 {
   filter: grayscale(1);
   opacity: .8;
 }
-
-
+.ant-layout-footer {
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+}
+.ant-layout-footer .logo {
+  width: 40px;
+}
 
 @media screen and (max-width: 576px) {
   .status-container {
