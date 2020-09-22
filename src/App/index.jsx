@@ -152,6 +152,7 @@ class App extends Component {
       <Layout className="App">
         <div className="title-bar">
           <h1>SCOTUS Vacancy - Senate Whip Count</h1>
+          
         </div>
         <Header>
           <Search

@@ -2,17 +2,17 @@
   font-family: 'Montserrat',
   sans-serif;
   text-align: center;
+}
+h1,
+h2, h3 {
+font-family: 'Oswald',
+sans-serif;
+font-weight: 700;
 
 }
-.App h1,
-h2 {
-  font-family: 'Anton',
-    sans-serif;
 
-}
-
-.App h1{
-  font-size: 34px;
+h1{
+  font-size: 42px;
 
 }
 
@@ -44,9 +44,10 @@ h2 {
 .title-bar h1 {
   color: #261b3b;
 }
-.ant-layout-header h3 {
+.ant-layout-header .search-label {
   color: white;
   line-height: 2;
+  font-weight: 600;
 }
 
 .App-link {
@@ -132,6 +133,10 @@ h2 {
   }
   .status-col {
     min-width: 0;
+  }
+  h1 {
+    font-size: 32px;
+
   }
 }
 

@@ -41,7 +41,7 @@ const Search = ({
   }
   return (
     <>
-      <h3>Where do your Senators stand?</h3>
+      <h4 className="search-label">Where do your Senators stand?</h4>
 
       <Select
         showSearch
