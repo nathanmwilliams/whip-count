@@ -15,11 +15,11 @@ export const NOMINEE_STATUS_TYPES_LIST = [
     "Will vote to confirm",
 ]
 export const SHORT_NOMINEE_STATUS_TYPES_LIST = [
-    "Will vote against",
+    "Will vote against Barrett",
     "Leaning against",
     "Not yet on record",
     "Leaning to confirm",
-    "Will confirm",
+    "Will confirm Barrett",
 ];
 
 export const SHORT_STATUS_TYPES_LIST = [

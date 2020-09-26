@@ -152,7 +152,7 @@ class App extends Component {
     return (
       <Layout className="App">
         <div className="title-bar">
-          <h1>SCOTUS Vacancy - Senate Whip Count</h1>
+          <h1>Amy Coney Barrett- Senate Whip Count</h1>
         </div>
         <Header>
           <Search
@@ -228,11 +228,19 @@ class App extends Component {
         <Footer>
           <div>
             A joint project of{" "}
-            <a href="https://townhallproject.com" target="_blank" rel="noopener noreferrer" >
+            <a
+              href="https://townhallproject.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img className="logo" alt="town hall project" src={thpLogo} />
             </a>{" "}
             and{" "}
-            <a href="https://savescotus.indivisible.org/" target="_blank" rel="noopener noreferrer" >
+            <a
+              href="https://savescotus.indivisible.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img className="logo" alt="indivisible" src={indivisibleLogo} />
             </a>
           </div>
