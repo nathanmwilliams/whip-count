@@ -4,8 +4,16 @@ import {
 } from './selectors';
 
 const mockSenators = [
-    {name: 'senator 1', status: "1"},
-    {name: 'senator 2', status: "2"}
+    {
+        name: 'senator 1',
+        status: "1",
+        nomineeStatus: "1"
+    },
+    {
+        name: 'senator 2',
+        status: "2",
+        nomineeStatus: "2"
+    }
 ]
 
 describe('getSenatorsByStatus', () => {

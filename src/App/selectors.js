@@ -2,7 +2,7 @@ import { filter } from "lodash";
 
 export const getSenatorsByStatus = (allSenators) => (
     allSenators.reduce((acc, cur) => {
-        const statusKey = cur.status
+        const statusKey = cur.nomineeStatus
         if (!acc[statusKey]) {
             acc[statusKey] = [cur]
         } else {

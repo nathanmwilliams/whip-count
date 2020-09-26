@@ -7,6 +7,21 @@ export const STATUS_TYPES_LIST = [
     "Unknown"
 ];
 
+export const NOMINEE_STATUS_TYPES_LIST = [
+    "Will vote against confirmation",
+    "Leaning against confirmation",
+    "Undecided or not on record",
+    "Leaning to confirm",
+    "Will vote to confirm",
+]
+export const SHORT_NOMINEE_STATUS_TYPES_LIST = [
+    "Will vote against",
+    "Leaning against",
+    "Not yet on record",
+    "Leaning to confirm",
+    "Will confirm",
+];
+
 export const SHORT_STATUS_TYPES_LIST = [
     "Wait until 2021",
     "Wait until after election",
@@ -16,31 +31,34 @@ export const SHORT_STATUS_TYPES_LIST = [
     "Unknown"
 ];
 
+
 export const STATUS_COLORS = {
     1: "#5e3c99",
     2: "#af90ea",
     3: "#c3c3c3",
-    4: "#e66101",
+    4: "#fdb863",
+    5: "#e66101",
 }
 
 export const STATUS_COLORS_PROGRESS = {
     1: "#5e3c99",
     2: "#af90ea",
     3: "#c3c3c3",
-    4: "#e66101",
+    4: "#fdb863",
+    5: "#e66101",
 }
 
-export const SHORT_STATUS_TYPES = SHORT_STATUS_TYPES_LIST.reduce((acc, status, index, array) => {
+export const SHORT_STATUS_TYPES = SHORT_NOMINEE_STATUS_TYPES_LIST.reduce((acc, status, index) => {
     acc[index + 1] = status;
     return acc;
 }, {})
 
-export const STATUS_TYPES = STATUS_TYPES_LIST.reduce((acc, status, index, array) => {
+export const STATUS_TYPES = NOMINEE_STATUS_TYPES_LIST.reduce((acc, status, index, array) => {
     acc[index + 1] = status;
     return acc;
 }, {})
 
-export const STATUS_DISPLAY = STATUS_TYPES_LIST.map((status, index) => {
+export const STATUS_DISPLAY = NOMINEE_STATUS_TYPES_LIST.map((status, index) => {
     return {
         value: index + 1,
         text: status,

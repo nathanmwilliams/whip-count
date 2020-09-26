@@ -71,14 +71,13 @@ const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
       onOk={closeModal}
       onCancel={closeModal}
       footer={null}
-    
     >
       <div className="modal-row">
         <div className="left-container modal-col">
           <Card
             style={{ maxWidth: 200 }}
             bordered={false}
-            className={`status__${senator.status} photo-card`}
+            className={`status__${senator.nomineeStatus} photo-card`}
             cover={
               <img
                 alt="example"
@@ -86,7 +85,9 @@ const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
               />
             }
           >
-            <Meta description={`Position: ${STATUS_TYPES[senator.status]}`} />
+            <Meta
+              description={`Position: ${STATUS_TYPES[senator.nomineeStatus]}`}
+            />
           </Card>
         </div>
         <div className="right-container modal-col">

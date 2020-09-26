@@ -87,6 +87,10 @@ h1{
 }
 
 .status__4.status-col h3{
+  color: #fdb863
+}
+
+.status__5.status-col h3 {
   color: #e66101
 }
 
