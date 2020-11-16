@@ -5,7 +5,7 @@ import {
   TwitterOutlined,
   LinkOutlined,
 } from "@ant-design/icons";
-import { STATUS_TYPES } from "../../constants";
+import { STATUS_TO_SHOW, STATUS_TYPES } from "../../constants";
 import "./style.css";
 
 const { Meta } = Card;
@@ -46,21 +46,21 @@ const townHallsDisplay = (townHalls) => (
   </Card>
 );
 
-const renderQuote = (quote) => {
+const renderCitation = (senator) => {
   return (
     <>
-      {quote.year && <p className="quote-year">Statement in {quote.year}</p>}
-      <p className="quote">{quote.text}</p>
-      {quote.citation && (
+      {/* {quote.year && <p className="quote-year">Statement in {quote.year}</p>}
+      <p className="quote">{quote.text}</p> */}
+      {senator.electionAcknowledgmentCitation && (
         <p className="quote-citation">
-          <a target="_blank" rel="noopener noreferrer" href={quote.citation}>
+          <a target="_blank" rel="noopener noreferrer" href={senator.electionAcknowledgmentCitation}>
             Link to citation
           </a>
         </p>
       )}
     </>
   );
-}
+};
 
 const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
   <>
@@ -77,7 +77,7 @@ const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
           <Card
             style={{ maxWidth: 200 }}
             bordered={false}
-            className={`status__${senator.nomineeStatus} photo-card`}
+            className={`status__${senator[STATUS_TO_SHOW]} photo-card`}
             cover={
               <img
                 alt="example"
@@ -86,12 +86,12 @@ const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
             }
           >
             <Meta
-              description={`Position: ${STATUS_TYPES[senator.nomineeStatus]}`}
+              description={`Position: ${STATUS_TYPES[senator[STATUS_TO_SHOW]]}`}
             />
           </Card>
         </div>
         <div className="right-container modal-col">
-          {senator.quote && renderQuote(senator.quote)}
+          {renderCitation(senator)}
           <Card
             title="Contact:"
             actions={[

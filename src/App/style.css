@@ -3,6 +3,7 @@
   sans-serif;
   text-align: center;
 }
+
 h1,
 h2, h3 {
 font-family: 'Oswald',
@@ -75,19 +76,19 @@ h1{
 
 
 .status__1.status-col h3{
-  color: #5e3c99
+  color: #542788
 }
 
 .status__2.status-col h3{
-  color: #af90ea
+  color: #998ec3
 }
 
 .status__3.status-col h3{
-  color: #7a7688
+  color: #c8afdf
 }
 
 .status__4.status-col h3{
-  color: #fdb863
+  color: #7a7688
 }
 
 .status__5.status-col h3 {

@@ -1,3 +1,4 @@
+import { STATUS_TO_SHOW } from '../constants';
 import {
     getSenatorsByStatus,
     getFilteredSenators
@@ -7,12 +8,12 @@ const mockSenators = [
     {
         name: 'senator 1',
         status: "1",
-        nomineeStatus: "1"
+        [STATUS_TO_SHOW]: "1"
     },
     {
         name: 'senator 2',
         status: "2",
-        nomineeStatus: "2"
+        [STATUS_TO_SHOW]: "2"
     }
 ]
 

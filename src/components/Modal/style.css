@@ -26,18 +26,22 @@
 }
 
 .status__1 .ant-card-body {
-    background-color: #5e3c99
+    background-color: #542788
 }
 
 .status__2 .ant-card-body {
-    background-color: #af90ea
+    background-color: #998ec3
 }
 
 .status__3 .ant-card-body {
-    background-color: #7a7688
+    background-color: #c8afdf
 }
 
 .status__4 .ant-card-body {
+    background-color: #7a7688
+}
+
+.status__5 .ant-card-body {
     background-color: #e66101
 }
 

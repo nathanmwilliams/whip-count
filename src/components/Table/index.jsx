@@ -3,7 +3,7 @@ import { Table, Button, Tag, Input, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 
-import { STATUS_COLORS, STATUS_DISPLAY, STATUS_TYPES } from "../../constants";
+import { STATUS_COLORS, STATUS_DISPLAY, STATUS_TO_SHOW, STATUS_TYPES } from "../../constants";
 import "./style.css";
 
 const { Column } = Table;
@@ -158,13 +158,13 @@ class SenateTable extends React.Component {
         />
         <Column
           title="Position"
-          dataIndex="nomineeStatus"
-          key="nomineeStatus"
+          dataIndex={STATUS_TO_SHOW}
+          key={STATUS_TO_SHOW}
           filters={STATUS_DISPLAY}
           onFilter={(value, record) => {
-            return record.nomineeStatus.includes(value);
+            return record[STATUS_TO_SHOW].includes(value);
           }}
-          sorter={makeSortFunction("nomineeStatus")}
+          sorter={makeSortFunction(STATUS_TO_SHOW)}
           render={(id) => {
             return (
               <Tag color={STATUS_COLORS[id]} key={id}>
