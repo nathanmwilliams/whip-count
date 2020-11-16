@@ -37,6 +37,7 @@ h1{
   background-image: url('./header.png');
   background-size: cover;
   background-position-x: center;
+  background-position-y: center;
   display: flex;
   align-items: center;
   justify-content: space-around;

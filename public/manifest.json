@@ -1,6 +1,6 @@
 {
-  "short_name": "Senate Whip Count",
-  "name": "SCOTUS Vacancy - Senate Whip Count",
+  "short_name": "Respect the Results",
+  "name": "Respect the Results",
   "icons": [
     {
       "src": "favicon.png",
@@ -13,8 +13,8 @@
       "sizes": "192x192"
     },
     {
-      "src": "banner.png",
-      "type": "image/png",
+      "src": "banner.jpg",
+      "type": "image/jpg",
       "sizes": "512x512"
     }
   ],

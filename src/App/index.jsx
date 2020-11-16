@@ -152,7 +152,7 @@ class App extends Component {
     return (
       <Layout className="App">
         <div className="title-bar">
-          <h1>Amy Coney Barrett- Senate Whip Count</h1>
+          <h1>Respect the Results</h1>
         </div>
         <Header>
           <Search
@@ -237,7 +237,7 @@ class App extends Component {
             </a>{" "}
             and{" "}
             <a
-              href="https://savescotus.indivisible.org/"
+              href="https://indivisible.org/"
               target="_blank"
               rel="noopener noreferrer"
             >
