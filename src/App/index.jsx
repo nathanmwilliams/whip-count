@@ -227,7 +227,6 @@ class App extends Component {
         </Content>
         <Footer>
           <div>
-            A joint project of{" "}
             <a
               href="https://townhallproject.com"
               target="_blank"
@@ -235,17 +234,9 @@ class App extends Component {
             >
               <img className="logo" alt="town hall project" src={thpLogo} />
             </a>{" "}
-            and{" "}
-            <a
-              href="https://indivisible.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img className="logo" alt="indivisible" src={indivisibleLogo} />
-            </a>
           </div>
           <div>
-            <Button href="mailto:info@townhallproject.com" type="primary">
+            <Button href="mailto:info@townhallproject.com" type="text">
               Contact
             </Button>
           </div>
