@@ -9,7 +9,7 @@ const ELECTION_STATUS_TYPE_LIST = [
     "Calls to begin transition processes",
     "Calls for Biden to receive Security Briefings",
     "No comment or vague comments",
-    "Challenging or denying election results"
+    "Challenging or disputing election results"
 ]
 
 const SHORT_ELECTION_STATUS_TYPE_LIST = [
@@ -17,7 +17,7 @@ const SHORT_ELECTION_STATUS_TYPE_LIST = [
     "Calls for transition processes",
     "Calls for security briefings",
     "No comment or vague comments",
-    "Denying election results"
+    "Disputing election results"
 ]
 
 const STATUS_TYPES_LIST = [
