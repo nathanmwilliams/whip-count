@@ -13,6 +13,7 @@ import ProgressBar from "../components/ProgressBar";
 
 import thpLogo from '../thp-logo.png';
 import indivisibleLogo from "../indivisible-logo.png";
+import circleInPerson from '../circle-in-person.svg'
 
 const { Header, Content, Footer } = Layout;
 
@@ -196,6 +197,7 @@ class App extends Component {
                           <Image
                             preview={false}
                             alt={senator.displayName}
+                            fallback={circleInPerson}
                             src={`https://www.govtrack.us/static/legislator-photos/${senator.govtrack_id}-100px.jpeg`}
                           />
                         </div>
