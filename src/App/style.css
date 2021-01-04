@@ -124,6 +124,15 @@ h1{
   filter: grayscale(1);
   opacity: .8;
 }
+
+.image-container .ant-image-error {
+  display: flex;
+  overflow: hidden;
+}
+
+.image-container .ant-image-error img{
+  opacity: 0.3;
+}
 .ant-layout-footer {
   padding: 10px 20px;
   background-color: #f0f0f0;

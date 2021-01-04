@@ -23,6 +23,23 @@ const tooltipPlacement = {
   4: "left"
 }
 
+const formatParty = (party) => {
+  if (!party) {
+    return console.log('no party')
+  }
+  if (party.length > 1) {
+    return party
+  }
+  switch (party) {
+    case 'D':
+      return 'Democratic'
+      case 'R':
+        return 'Republican'
+      default: 
+        return 'Independent'
+  }
+
+}
 class App extends Component {
   state = {
     senators: [],
@@ -48,9 +65,11 @@ class App extends Component {
       .then((snapshot) => {
         const senators = [];
         snapshot.forEach((node) => {
+       
           const data = {
             ...node.data(),
             id: node.id,
+            party: node.data().party ? formatParty(node.data().party): console.log(node.data().displayName),
           };
           senators.push(data);
         });
