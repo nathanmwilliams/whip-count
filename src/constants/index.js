@@ -17,7 +17,7 @@ const SHORT_ELECTION_STATUS_TYPE_LIST = [
     "Calls for transition processes",
     "Calls for security briefings",
     "No comment or vague comments",
-    "Voting against Biden's certification"
+    "Voting against certification"
 ]
 
 const STATUS_TYPES_LIST = [
