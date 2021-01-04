@@ -5,19 +5,19 @@ const NOMINEE_STATUS_KEY = "nomineeStatus";
 export const STATUS_TO_SHOW = ELECTION_STATUS_KEY;
 
 const ELECTION_STATUS_TYPE_LIST = [
-    "Acknowledges President-Elect Biden",
+    "Voting to certify Biden's Electoral College victory",
     "Calls to begin transition processes",
     "Calls for Biden to receive Security Briefings",
     "No comment or vague comments",
-    "Challenging or disputing election results"
+    "Voting against certification of Biden's Electoral College victory"
 ]
 
 const SHORT_ELECTION_STATUS_TYPE_LIST = [
-    "Acknowledges President-Elect Biden",
+    "Voting to certify Biden's Electoral College victory",
     "Calls for transition processes",
     "Calls for security briefings",
     "No comment or vague comments",
-    "Disputing election results"
+    "Voting against Biden's certification"
 ]
 
 const STATUS_TYPES_LIST = [

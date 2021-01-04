@@ -12,7 +12,6 @@ import SenateTable, { makeSortFunction } from '../components/Table';
 import ProgressBar from "../components/ProgressBar";
 
 import thpLogo from '../thp-logo.png';
-import indivisibleLogo from "../indivisible-logo.png";
 import circleInPerson from '../circle-in-person.svg'
 
 const { Header, Content, Footer } = Layout;
