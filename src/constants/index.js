@@ -2,7 +2,25 @@
 const ELECTION_STATUS_KEY = "electionAcknowledgmentStatus";
 const SCOTUS_STATUS_KEY = "status";
 const NOMINEE_STATUS_KEY = "nomineeStatus";
-export const STATUS_TO_SHOW = ELECTION_STATUS_KEY;
+const IMPEACHMENT_STATUS_KEY = "impeachmentStatus"
+export const STATUS_TO_SHOW = IMPEACHMENT_STATUS_KEY;
+
+
+const IMPEACHMENT_STATUS_TYPE_LIST = [
+    "Full support for impeachment",
+    "Open to impeachment",
+    "No position",
+    "No comment or vague comments",
+    "Opposed to impeachment"
+]
+
+const SHORT_IMPEACHMENT_STATUS_TYPE_LIST = [
+    "Full support for impeachment",
+    "Open to impeachment",
+    "No position",
+    "No comment or vague comments",
+    "Opposed to impeachment"
+]
 
 const ELECTION_STATUS_TYPE_LIST = [
     "Voting to certify Biden's Electoral College victory",
@@ -65,7 +83,11 @@ const STATUS_MAPPING = {
     [SCOTUS_STATUS_KEY]:{
         shortStatus: SHORT_STATUS_TYPES_LIST,
         longStatus: STATUS_TYPES_LIST
-    }
+    },
+    [IMPEACHMENT_STATUS_KEY]: {
+        shortStatus: SHORT_IMPEACHMENT_STATUS_TYPE_LIST,
+        longStatus: IMPEACHMENT_STATUS_TYPE_LIST
+    },
 }
 
 const DARK_PURPLE = "#542788"
@@ -79,16 +101,16 @@ const DARK_ORANGE = "#e66101"
 export const STATUS_COLORS = {
     1: DARK_PURPLE,
     2: MED_PURPLE,
-    3: LIGHT_PURPLE,
-    4: GRAY,
+    3: GRAY,
+    4: MED_ORANGE,
     5: DARK_ORANGE,
 }
 
 export const STATUS_COLORS_PROGRESS = {
     1: DARK_PURPLE,
     2: MED_PURPLE,
-    3: LIGHT_PURPLE,
-    4: GRAY,
+    3: GRAY,
+    4: MED_ORANGE,
     5: DARK_ORANGE,
 }
 

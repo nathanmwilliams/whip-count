@@ -171,7 +171,7 @@ class App extends Component {
     return (
       <Layout className="App">
         <div className="title-bar">
-          <h1>Respect the Results</h1>
+          <h1>Senate Whip Count</h1>
         </div>
         <Header>
           <Search
