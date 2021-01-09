@@ -8,7 +8,7 @@ export const STATUS_TO_SHOW = IMPEACHMENT_STATUS_KEY;
 
 const IMPEACHMENT_STATUS_TYPE_LIST = [
     "Full support for impeachment",
-    "Open to impeachment",
+    "Open to removal options",
     "No position",
     "No comment or vague comments",
     "Opposed to impeachment"
@@ -16,7 +16,7 @@ const IMPEACHMENT_STATUS_TYPE_LIST = [
 
 const SHORT_IMPEACHMENT_STATUS_TYPE_LIST = [
     "Full support for impeachment",
-    "Open to impeachment",
+    "Open to removal options",
     "No position",
     "No comment or vague comments",
     "Opposed to impeachment"
