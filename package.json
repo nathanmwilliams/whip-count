@@ -1,8 +1,8 @@
 {
-  "name": "dog-team-picker",
+  "name": "whip-count",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://respecttheresults.org",
+  "homepage": "https://peopleswhipcount.org",
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
     "@testing-library/jest-dom": "^4.2.4",
