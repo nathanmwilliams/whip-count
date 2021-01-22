@@ -4,11 +4,11 @@ import { map } from "lodash";
 
 
 import './style.css';
-import { SHORT_STATUS_TYPES } from '../constants';
 import SenateTable from '../components/Table';
 
 import circleInPerson from '../circle-in-person.svg'
 import ProgressBar from '../components/ProgressBar';
+import { getShortStatusText } from './selectors';
 
 
 const tooltipPlacement = {
@@ -65,7 +65,9 @@ class IssueCounts extends Component {
  
 
   render() {
-    const {senateMapByStatus, filteredSenators} = this.props;
+    const { senateMapByStatus, filteredSenators, selectedIssue } = this.props;
+    const shortStatusText = getShortStatusText(selectedIssue);
+    
     return (
       <>
         <Row className="all-status-container">
@@ -76,7 +78,7 @@ class IssueCounts extends Component {
                 flex={"1 1 auto"}
                 className={`status-col status__${statusNo}`}
               >
-                <h3>{`${SHORT_STATUS_TYPES[statusNo]} (${senators.length})`}</h3>
+                <h3>{`${shortStatusText[statusNo]} (${senators.length})`}</h3>
                 <div className="status-container">
                   {map(senators, (senator) => (
                     <Tooltip
@@ -120,6 +122,7 @@ class IssueCounts extends Component {
             searchedSenator={this.props.searchedSenator}
             height={this.props.tableHeight}
             getTableHight={this.getTableHight}
+            selectedIssue={selectedIssue}
           />
         </Row>
       </>

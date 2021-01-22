@@ -124,7 +124,7 @@ const SHORT_STATUS_TYPES_LIST = [
     "Unknown"
 ];
 
-const STATUS_MAPPING = {
+export const STATUS_MAPPING = {
     [ELECTION_STATUS_KEY]: {
         shortStatus: SHORT_ELECTION_STATUS_TYPE_LIST,
         longStatus: ELECTION_STATUS_TYPE_LIST

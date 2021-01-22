@@ -1,11 +1,14 @@
 import { filter } from "lodash"; 
+import {
+    STATUS_MAPPING
+} from "../constants";
 
 export const getSenatorsByStatus = (allSenators, selectedStatus) => {
     if (!selectedStatus) {
         return {}
     }
 
-    allSenators.reduce((acc, cur) => {
+    return allSenators.reduce((acc, cur) => {
         const statusKey = cur[selectedStatus]
         if (!acc[statusKey]) {
             acc[statusKey] = [cur]
@@ -14,6 +17,41 @@ export const getSenatorsByStatus = (allSenators, selectedStatus) => {
         }
         return acc;
     }, {})
+}
+
+export const getShortStatusText = (issue) => {
+    if (!issue) {
+        return {}
+    }
+    return STATUS_MAPPING[issue].shortStatus.reduce((acc, status, index) => {
+        acc[index + 1] = status;
+        return acc;
+    }, {})
+}
+
+export const getLongStatusText = (issue) => {
+    if (!issue) {
+        return {}
+    }
+    return STATUS_MAPPING[issue].longStatus.reduce((acc, status, index, array) => {
+        acc[index + 1] = status;
+        return acc;
+    }, {})
+}
+
+export const getStatusTypes = (issue) => {
+    return STATUS_MAPPING[issue].longStatus.reduce((acc, status, index, array) => {
+        acc[index + 1] = status;
+        return acc;
+    }, {})
+}
+
+export const getStatusDisplay = (issue) => {
+    return STATUS_MAPPING[issue].longStatus.map((status, index) => {
+                return {
+                    value: index + 1,
+                    text: status,
+                }})
 }
 
 export const getFilteredSenators = (allSenators, filterKey, filterValue) => {

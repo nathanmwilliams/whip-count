@@ -3,8 +3,9 @@ import { Table, Button, Tag, Input, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 
-import { STATUS_COLORS, STATUS_DISPLAY, STATUS_TO_SHOW, STATUS_TYPES } from "../../constants";
+import { STATUS_COLORS, STATUS_TYPES } from "../../constants";
 import "./style.css";
+import { getStatusDisplay, getStatusTypes } from "../../App/selectors";
 
 const { Column } = Table;
 export const makeSortFunction = (key) => {
@@ -106,7 +107,7 @@ class SenateTable extends React.Component {
       ),
   });
   render() {
-    const { senators, height } = this.props;
+    const { senators, height, selectedIssue } = this.props;
     return (
       <Table
         dataSource={senators}
@@ -158,17 +159,17 @@ class SenateTable extends React.Component {
         />
         <Column
           title="Position"
-          dataIndex={STATUS_TO_SHOW}
-          key={STATUS_TO_SHOW}
-          filters={STATUS_DISPLAY}
+          dataIndex={selectedIssue}
+          key={selectedIssue}
+          filters={getStatusDisplay(selectedIssue)}
           onFilter={(value, record) => {
-            return record[STATUS_TO_SHOW].includes(value);
+            return record[selectedIssue].includes(value);
           }}
-          sorter={makeSortFunction(STATUS_TO_SHOW)}
+          sorter={makeSortFunction(selectedIssue)}
           render={(id) => {
             return (
               <Tag color={STATUS_COLORS[id]} key={id}>
-                {STATUS_TYPES[id]}
+                {getStatusTypes(selectedIssue)[id]}
               </Tag>
             );
           }}

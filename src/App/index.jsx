@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-import { Col, Row, Tooltip, Layout, Button, Card } from "antd";
-import { map, filter } from "lodash";
+import { Layout, Button, Col, Row } from "antd";
+import { find, filter } from "lodash";
+import { ArrowLeftOutlined } from "@ant-design/icons";
+import classNames from "classnames";
 
 import { firestore, firebasedb } from '../utils/setup-firebase';
-import { getFilteredSenators, getSenatorsByStatus } from './selectors';
+import {
+  getFilteredSenators,
+  getLongStatusText,
+  getSenatorsByStatus,
+  getShortStatusText,
+} from "./selectors";
 import SenatorModal from "../components/Modal";
 import Search from "../components/Search";
 import './style.css';
-import { SHORT_STATUS_TYPES, TRACKED_ISSUES } from '../constants';
 import SenateTable, { makeSortFunction } from '../components/Table';
 import ProgressBar from "../components/ProgressBar";
 
@@ -15,6 +21,7 @@ import thpLogo from '../thp-logo.png';
 import circleInPerson from '../circle-in-person.svg'
 import IssueCounts from './IssueCounts';
 import LandingPageCards from '../components/LandingPageCards';
+import { TRACKED_ISSUES } from '../constants';
 
 const { Header, Content, Footer } = Layout;
 
@@ -79,7 +86,6 @@ class App extends Component {
           senators.push(data);
         });
         senators.sort(makeSortFunction("state"));
-        console.log(senators);
         this.setState({ senators });
       })
  
@@ -101,8 +107,11 @@ class App extends Component {
   };
 
   setIssue = (issueKey) => {
-    console.log(issueKey)
     this.setState({selectedIssue: issueKey})
+  }
+
+  clearIssue = () => {
+    this.setState({selectedIssue: ""})
   }
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -135,6 +144,7 @@ class App extends Component {
         senator={modalSenator}
         townHalls={thisTownhalls}
         closeModal={this.closeModal}
+        selectedIssue={this.state.selectedIssue}
       />
     );
   };
@@ -164,16 +174,40 @@ class App extends Component {
   };
 
   render() {
-    const senateMapByStatus = getSenatorsByStatus(this.state.senators, this.state.selectedIssue);
+    const { selectedIssue } = this.state;
+    const senateMapByStatus = getSenatorsByStatus(this.state.senators, selectedIssue);
     const filteredSenators = getFilteredSenators(
       this.state.senators,
       this.state.searchedColumn,
       this.state.searchText
     );
+
     return (
       <Layout className="App">
-        <div className="title-bar">
-          <h1>Senate Whip Count</h1>
+        <div
+          className={classNames([
+            "title-bar",
+            { "has-back-button": !!selectedIssue },
+          ])}
+        >
+          {selectedIssue ? (
+            <Row align="middle">
+              <Col span={6}>
+                <Button
+                  ghost={true}
+                  onClick={this.clearIssue}
+                  icon={<ArrowLeftOutlined />}
+                >
+                  Back to all issues
+                </Button>
+              </Col>
+              <Col span={12}>
+                <h1>{find(TRACKED_ISSUES, { key: selectedIssue }).header}</h1>
+              </Col>
+            </Row>
+          ) : (
+            <h1>Peoples Whip Count</h1>
+          )}
         </div>
         <Header>
           <Search
@@ -204,6 +238,7 @@ class App extends Component {
               tableHeight={this.state.tableHeight}
               setTableHeight={this.setTableHeight}
               openModal={this.openModal}
+              selectedIssue={this.state.selectedIssue}
             />
           ) : (
             <LandingPageCards setIssue={this.setIssue} />

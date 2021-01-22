@@ -5,8 +5,8 @@ import {
   TwitterOutlined,
   LinkOutlined,
 } from "@ant-design/icons";
-import { STATUS_TO_SHOW, STATUS_TYPES } from "../../constants";
 import "./style.css";
+import { getStatusTypes } from "../../App/selectors";
 
 const { Meta } = Card;
 
@@ -62,7 +62,13 @@ const renderCitation = (senator) => {
   );
 };
 
-const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
+const SenatorModal = ({
+  senator,
+  visible,
+  closeModal,
+  townHalls,
+  selectedIssue,
+}) => (
   <>
     <Modal
       width={"80%"}
@@ -77,7 +83,7 @@ const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
           <Card
             style={{ maxWidth: 200 }}
             bordered={false}
-            className={`status__${senator[STATUS_TO_SHOW]} photo-card`}
+            className={`status__${senator[selectedIssue]} photo-card`}
             cover={
               <img
                 alt="example"
@@ -86,7 +92,7 @@ const SenatorModal = ({ senator, visible, closeModal, townHalls }) => (
             }
           >
             <Meta
-              description={`Position: ${STATUS_TYPES[senator[STATUS_TO_SHOW]]}`}
+              description={`Position: ${getStatusTypes(selectedIssue)[senator[selectedIssue]]}`}
             />
           </Card>
         </div>
