@@ -8,6 +8,23 @@ const DC_STATEHOOD_STATUS_KEY = "dcStatehoodStatus";
 const HR1_STATUS_KEY = "hr1Status";
 const HR4_STATUS_KEY = "hr4Status";
 
+export const TRACKED_ISSUES = [{
+    key: IMPEACHMENT_STATUS_KEY,
+    header: "Impeachment Trial"
+}, {
+    key: FILIBUSTER_STATUS_KEY,
+    header: "Filibuster Reform"
+}, {
+    key: DC_STATEHOOD_STATUS_KEY,
+    header: "D.C. Statehood"
+}, {
+    key: HR1_STATUS_KEY,
+    header: "For the People Act"
+}, {
+    key: HR4_STATUS_KEY,
+    header: "John Lewis Voting Rights Advancement Act"
+}]
+
 export const STATUS_TO_SHOW = IMPEACHMENT_STATUS_KEY;
 
 const DC_STATEHOOD_STATUS_TYPE_LIST = [
@@ -135,6 +152,10 @@ const STATUS_MAPPING = {
     [HR4_STATUS_KEY]: {
         shortStatus: HR4_STATUS_TYPE_LIST,
         longStatus: HR4_STATUS_TYPE_LIST
+    },
+    [FILIBUSTER_STATUS_KEY]: {
+        shortStatus: FILIBUSTER_STATUS_TYPE_LIST,
+        longStatus: FILIBUSTER_STATUS_TYPE_LIST
     }
 }
 

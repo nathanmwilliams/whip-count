@@ -1,9 +1,12 @@
 import { filter } from "lodash"; 
-import { STATUS_TO_SHOW } from "../constants";
 
-export const getSenatorsByStatus = (allSenators) => (
+export const getSenatorsByStatus = (allSenators, selectedStatus) => {
+    if (!selectedStatus) {
+        return {}
+    }
+
     allSenators.reduce((acc, cur) => {
-        const statusKey = cur[STATUS_TO_SHOW]
+        const statusKey = cur[selectedStatus]
         if (!acc[statusKey]) {
             acc[statusKey] = [cur]
         } else {
@@ -11,9 +14,7 @@ export const getSenatorsByStatus = (allSenators) => (
         }
         return acc;
     }, {})
-)
-
-
+}
 
 export const getFilteredSenators = (allSenators, filterKey, filterValue) => {
     if (filterKey && filterValue) {

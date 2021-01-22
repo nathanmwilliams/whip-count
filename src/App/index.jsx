@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Tooltip, Layout, Button, Image } from "antd";
+import { Col, Row, Tooltip, Layout, Button, Card } from "antd";
 import { map, filter } from "lodash";
 
 import { firestore, firebasedb } from '../utils/setup-firebase';
@@ -7,12 +7,14 @@ import { getFilteredSenators, getSenatorsByStatus } from './selectors';
 import SenatorModal from "../components/Modal";
 import Search from "../components/Search";
 import './style.css';
-import { SHORT_STATUS_TYPES } from '../constants';
+import { SHORT_STATUS_TYPES, TRACKED_ISSUES } from '../constants';
 import SenateTable, { makeSortFunction } from '../components/Table';
 import ProgressBar from "../components/ProgressBar";
 
 import thpLogo from '../thp-logo.png';
 import circleInPerson from '../circle-in-person.svg'
+import IssueCounts from './IssueCounts';
+import LandingPageCards from '../components/LandingPageCards';
 
 const { Header, Content, Footer } = Layout;
 
@@ -46,6 +48,8 @@ class App extends Component {
     modalSenator: null,
     searchText: "",
     searchedColumn: "",
+    selectedIssue: "",
+    tableHeight: 0,
   };
 
   componentDidMount = () => {
@@ -65,23 +69,22 @@ class App extends Component {
       .then((snapshot) => {
         const senators = [];
         snapshot.forEach((node) => {
-       
           const data = {
             ...node.data(),
             id: node.id,
-            party: node.data().party ? formatParty(node.data().party): console.log(node.data().displayName),
+            party: node.data().party
+              ? formatParty(node.data().party)
+              : console.log(node.data().displayName),
           };
           senators.push(data);
         });
         senators.sort(makeSortFunction("state"));
-        console.log(senators)
+        console.log(senators);
         this.setState({ senators });
-      }).then(() => {
-        this.getTableHight();
-
-      });
+      })
  
-      window.addEventListener("resize", () => this.getTableHight());
+
+    window.addEventListener("resize", () => this.getTableHight());
   };
 
   handleStateSearch = (value) => {
@@ -91,23 +94,15 @@ class App extends Component {
     });
   };
 
-  getTableHight = () => {
-    const statusContainer = document.getElementsByClassName("all-status-container");
-    const footer = document.getElementsByClassName("ant-layout-footer");
-    const progressBar = document.getElementsByClassName(
-      "progress-bar-container"
-    );
-    const tableHeader = document.getElementsByClassName("ant-table-thead");
-    if (statusContainer[0] && progressBar[0] && tableHeader[0] && footer[0]) {
-      const height =
-        statusContainer[0].scrollHeight +
-        progressBar[0].scrollHeight +
-        footer[0].scrollHeight +
-        tableHeader[0].scrollHeight;
-      const windowHeight = window.innerHeight;
-      const tableHeight = windowHeight - height;
+  setTableHeight = (tableHeight) => {
+
       this.setState({ tableHeight });
-    }
+
+  };
+
+  setIssue = (issueKey) => {
+    console.log(issueKey)
+    this.setState({selectedIssue: issueKey})
   }
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -125,12 +120,6 @@ class App extends Component {
     this.setState({ searchText: "", searchedSenator: "" });
   };
 
-  scrollTo = (id, options) => {
-    const row = document.querySelector(`[data-row-key="${id}"]`);
-    if (row) {
-      row.scrollIntoView(options);
-    }
-  };
 
   renderModal = () => {
     const { modalSenator, townHalls } = this.state;
@@ -149,6 +138,14 @@ class App extends Component {
       />
     );
   };
+  
+   scrollTo = (id, options) => {
+    const row = document.querySelector(`[data-row-key="${id}"]`);
+    if (row) {
+      row.scrollIntoView(options);
+    }
+  };
+
 
   openModal = (senator) => {
     this.setState({ modalSenator: senator });
@@ -167,8 +164,12 @@ class App extends Component {
   };
 
   render() {
-    const senateMapByStatus = getSenatorsByStatus(this.state.senators);
-    const filteredSenators = getFilteredSenators(this.state.senators, this.state.searchedColumn, this.state.searchText);
+    const senateMapByStatus = getSenatorsByStatus(this.state.senators, this.state.selectedIssue);
+    const filteredSenators = getFilteredSenators(
+      this.state.senators,
+      this.state.searchedColumn,
+      this.state.searchText
+    );
     return (
       <Layout className="App">
         <div className="title-bar">
@@ -181,6 +182,8 @@ class App extends Component {
             selectSenator={this.selectSenator}
             handleReset={this.handleReset}
           />
+          {this.renderModal()}
+
           <Button
             ghost
             target="_blank"
@@ -190,61 +193,21 @@ class App extends Component {
           </Button>
         </Header>
         <Content className="team">
-          <Row className="all-status-container">
-            {map(senateMapByStatus, (senators, statusNo) => {
-              return (
-                <Col
-                  key={statusNo}
-                  flex={"1 1 auto"}
-                  className={`status-col status__${statusNo}`}
-                >
-                  <h3>{`${SHORT_STATUS_TYPES[statusNo]} (${senators.length})`}</h3>
-                  <div className="status-container">
-                    {map(senators, (senator) => (
-                      <Tooltip
-                        key={senator.id}
-                        placement={tooltipPlacement[statusNo]}
-                        title={`Sen. ${senator.displayName} (${senator.party[0]}) ${senator.state}`}
-                      >
-                        <div
-                          className={[
-                            "image-container",
-                            senator.party.toLowerCase(),
-                          ].join(" ")}
-                          onClick={() => this.selectSenator(senator)}
-                        >
-                          <Image
-                            preview={false}
-                            alt={senator.displayName}
-                            fallback={circleInPerson}
-                            src={`https://www.govtrack.us/static/legislator-photos/${senator.govtrack_id}-100px.jpeg`}
-                          />
-                        </div>
-                      </Tooltip>
-                    ))}
-                  </div>
-                </Col>
-              );
-            })}
-          </Row>
-          {senateMapByStatus[1] && (
-            <ProgressBar senateMapByStatus={senateMapByStatus} />
-          )}
-          <Row className="table-container" gutter={16}>
-            <SenateTable
-              senators={filteredSenators}
-              getSearchProps={this.getSearchProps}
-              handleSearch={this.handleSearch}
-              handleReset={this.handleReset}
-              searchedColumn={this.state.searchedColumn}
+          {this.state.selectedIssue ? (
+            <IssueCounts
+              selectSenator={this.selectSenator}
+              senateMapByStatus={senateMapByStatus}
+              filteredSenators={filteredSenators}
               searchText={this.state.searchText}
-              openModal={this.openModal}
+              searchedColumn={this.state.searchedColumn}
               searchedSenator={this.state.searchedSenator}
-              height={this.state.tableHeight}
-              getTableHight={this.getTableHight}
+              tableHeight={this.state.tableHeight}
+              setTableHeight={this.setTableHeight}
+              openModal={this.openModal}
             />
-            {this.renderModal()}
-          </Row>
+          ) : (
+            <LandingPageCards setIssue={this.setIssue} />
+          )}
         </Content>
         <Footer>
           <div>
