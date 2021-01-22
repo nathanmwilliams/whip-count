@@ -74,7 +74,6 @@ class App extends Component {
           senators.push(data);
         });
         senators.sort(makeSortFunction("state"));
-        console.log(senators)
         this.setState({ senators });
       }).then(() => {
         this.getTableHight();

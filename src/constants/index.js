@@ -2,16 +2,52 @@
 const ELECTION_STATUS_KEY = "electionAcknowledgmentStatus";
 const SCOTUS_STATUS_KEY = "status";
 const NOMINEE_STATUS_KEY = "nomineeStatus";
-const IMPEACHMENT_STATUS_KEY = "impeachmentStatus"
+const IMPEACHMENT_STATUS_KEY = "impeachmentTrialStatus";
+const FILIBUSTER_STATUS_KEY = "filibusterReformStatus";
+const DC_STATEHOOD_STATUS_KEY = "dcStatehoodStatus";
+const HR1_STATUS_KEY = "hr1Status";
+const HR4_STATUS_KEY = "hr4Status";
+
 export const STATUS_TO_SHOW = IMPEACHMENT_STATUS_KEY;
 
+const DC_STATEHOOD_STATUS_TYPE_LIST = [
+    "Supports D.C. Statehood",
+    "Open to D.C. Statehood",
+    "Position unknown",
+    "",
+    "Opposed to D.C. Statehood"
+];
+
+const HR1_STATUS_TYPE_LIST = [
+    "Supports H.R. 1",
+    "Open to H.R. 1",
+    "Position unknown",
+    "",
+    "Opposed to H.R. 1"
+];
+
+const HR4_STATUS_TYPE_LIST = [
+    "Supports H.R. 4",
+    "Open to H.R. 4",
+    "Position unknown",
+    "",
+    "Opposed to H.R. 4"
+];
+
+const FILIBUSTER_STATUS_TYPE_LIST = [
+    "Supports eliminating legislative filibuster",
+    "Open to filibuster reform",
+    "Position unknown",
+    "",
+    "Opposed to filibuster reform"
+];
 
 const IMPEACHMENT_STATUS_TYPE_LIST = [
-    "Full support for impeachment",
-    "Open to removal options",
-    "No position",
-    "No comment or vague comments",
-    "Opposed to impeachment"
+    "Expected to vote to convict",
+    "Supported House impeachment",
+    "Position unknown",
+    "Non-committal on trial vote",
+    "Opposes conviction"
 ]
 
 const SHORT_IMPEACHMENT_STATUS_TYPE_LIST = [
@@ -88,6 +124,18 @@ const STATUS_MAPPING = {
         shortStatus: SHORT_IMPEACHMENT_STATUS_TYPE_LIST,
         longStatus: IMPEACHMENT_STATUS_TYPE_LIST
     },
+    [DC_STATEHOOD_STATUS_KEY]: {
+        shortStatus: DC_STATEHOOD_STATUS_TYPE_LIST,
+        longStatus: DC_STATEHOOD_STATUS_TYPE_LIST
+    },
+    [HR1_STATUS_KEY]: {
+        shortStatus: HR1_STATUS_TYPE_LIST,
+        longStatus: HR1_STATUS_TYPE_LIST
+    },
+    [HR4_STATUS_KEY]: {
+        shortStatus: HR4_STATUS_TYPE_LIST,
+        longStatus: HR4_STATUS_TYPE_LIST
+    }
 }
 
 const DARK_PURPLE = "#542788"
