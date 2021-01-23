@@ -57,6 +57,7 @@ class App extends Component {
     searchedColumn: "",
     selectedIssue: "",
     tableHeight: 0,
+    contentHeight: 0,
   };
 
   componentDidMount = () => {
@@ -87,9 +88,28 @@ class App extends Component {
         });
         senators.sort(makeSortFunction("state"));
         this.setState({ senators });
-      })
- 
+      });
+      this.getContentHeight();
+      window.addEventListener("resize", () => this.getContentHeight());
 
+  };
+
+  getContentHeight = () => {
+    const titleBar = document.getElementsByClassName(
+      "title-bar"
+    );
+    const footer = document.getElementsByClassName("ant-layout-footer");
+
+    const header = document.getElementsByClassName("ant-layout-header");
+    if (titleBar[0] && header[0] && footer[0]) {
+      const height =
+        titleBar[0].scrollHeight +
+        header[0].scrollHeight +
+        footer[0].scrollHeight
+      const windowHeight = window.innerHeight;
+      const contentHeight = windowHeight - height -40;
+      this.setState({ contentHeight })
+    }
   };
 
   handleStateSearch = (value) => {
@@ -100,18 +120,16 @@ class App extends Component {
   };
 
   setTableHeight = (tableHeight) => {
-
-      this.setState({ tableHeight });
-
+    this.setState({ tableHeight });
   };
 
   setIssue = (issueKey) => {
-    this.setState({selectedIssue: issueKey})
-  }
+    this.setState({ selectedIssue: issueKey });
+  };
 
   clearIssue = () => {
-    this.setState({selectedIssue: ""})
-  }
+    this.setState({ selectedIssue: "" });
+  };
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -127,7 +145,6 @@ class App extends Component {
     }
     this.setState({ searchText: "", searchedSenator: "" });
   };
-
 
   renderModal = () => {
     const { modalSenator, townHalls } = this.state;
@@ -147,14 +164,13 @@ class App extends Component {
       />
     );
   };
-  
-   scrollTo = (id, options) => {
+
+  scrollTo = (id, options) => {
     const row = document.querySelector(`[data-row-key="${id}"]`);
     if (row) {
       row.scrollIntoView(options);
     }
   };
-
 
   openModal = (senator) => {
     this.setState({ modalSenator: senator });
@@ -174,7 +190,10 @@ class App extends Component {
 
   render() {
     const { selectedIssue } = this.state;
-    const senateMapByStatus = getSenatorsByStatus(this.state.senators, selectedIssue);
+    const senateMapByStatus = getSenatorsByStatus(
+      this.state.senators,
+      selectedIssue
+    );
     const filteredSenators = getFilteredSenators(
       this.state.senators,
       this.state.searchedColumn,
@@ -225,7 +244,7 @@ class App extends Component {
             Submit position update
           </Button>
         </Header>
-        <Content className="team">
+        <Content className="content">
           {this.state.selectedIssue ? (
             <IssueCounts
               selectSenator={this.selectSenator}
@@ -240,7 +259,10 @@ class App extends Component {
               selectedIssue={this.state.selectedIssue}
             />
           ) : (
-            <LandingPageCards setIssue={this.setIssue} />
+            <LandingPageCards
+              setIssue={this.setIssue}
+              height={this.state.contentHeight}
+            />
           )}
         </Content>
         <Footer>

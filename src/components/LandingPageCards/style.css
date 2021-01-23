@@ -1,3 +1,18 @@
+.landing-page {
+    margin: 20px;
+}
+.issue-card {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+.cards-row {
+    max-width: 1120px;
+    margin: auto!important;
+    text-align: center;
+}
 .issue-card a {
     font-size: 1em!important;
 }
