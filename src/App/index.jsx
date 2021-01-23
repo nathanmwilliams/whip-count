@@ -224,7 +224,7 @@ class App extends Component {
               </Col>
             </Row>
           ) : (
-            <h1>Peoples Whip Count</h1>
+            <h1>People's Whip Count</h1>
           )}
         </div>
         <Header>
