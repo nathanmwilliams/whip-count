@@ -113,9 +113,8 @@ class IssueCounts extends Component {
         <Row className="table-container" gutter={16}>
           <SenateTable
             senators={filteredSenators}
-            getSearchProps={this.getSearchProps}
-            handleSearch={this.handleSearch}
-            handleReset={this.handleReset}
+            handleSearch={this.props.handleSearch}
+            handleReset={this.props.handleReset}
             searchedColumn={this.props.searchedColumn}
             searchText={this.props.searchText}
             openModal={this.props.openModal}

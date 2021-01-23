@@ -3,7 +3,7 @@ import { Table, Button, Tag, Input, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 
-import { STATUS_COLORS, STATUS_TYPES } from "../../constants";
+import { STATUS_COLORS } from "../../constants";
 import "./style.css";
 import { getStatusDisplay, getStatusTypes } from "../../App/selectors";
 

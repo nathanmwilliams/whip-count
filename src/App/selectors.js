@@ -1,4 +1,6 @@
-import { filter } from "lodash"; 
+import {
+    filter
+} from "lodash";
 import {
     STATUS_MAPPING
 } from "../constants";
@@ -47,11 +49,17 @@ export const getStatusTypes = (issue) => {
 }
 
 export const getStatusDisplay = (issue) => {
-    return STATUS_MAPPING[issue].longStatus.map((status, index) => {
-                return {
-                    value: index + 1,
-                    text: status,
-                }})
+    const statusDisplay = STATUS_MAPPING[issue].longStatus
+    .map((status, index) => {
+        
+        return {
+            value: index + 1,
+            text: status,
+        }
+    })
+    .filter((ele) => !!ele.text)
+    console.log(statusDisplay)
+    return statusDisplay
 }
 
 export const getFilteredSenators = (allSenators, filterKey, filterValue) => {
@@ -59,7 +67,7 @@ export const getFilteredSenators = (allSenators, filterKey, filterValue) => {
         return filter(allSenators, (senator) => {
             return senator[filterKey].toLowerCase() === filterValue.toLowerCase()
         })
-        
+
     }
     return allSenators;
 }

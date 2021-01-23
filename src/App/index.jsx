@@ -267,6 +267,8 @@ class App extends Component {
               setTableHeight={this.setTableHeight}
               openModal={this.openModal}
               selectedIssue={this.state.selectedIssue}
+              handleSearch={this.handleSearch}
+              handleReset={this.handleReset}
             />
           ) : (
             <LandingPageCards
