@@ -1,4 +1,4 @@
-# Senate Whip Count
+# People's Whip Count
 #### About
 # Contributing:
 
