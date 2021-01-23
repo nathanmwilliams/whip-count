@@ -20,7 +20,7 @@
 .right-container {
     flex: 2 1 auto;
 }
-.ant-card-meta-description {
+.modal .ant-card-meta-description {
     font-weight: 600;
     color: white;
 }

@@ -90,7 +90,6 @@ class App extends Component {
       })
  
 
-    window.addEventListener("resize", () => this.getTableHight());
   };
 
   handleStateSearch = (value) => {

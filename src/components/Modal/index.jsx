@@ -77,6 +77,7 @@ const SenatorModal = ({
       onOk={closeModal}
       onCancel={closeModal}
       footer={null}
+      className="modal"
     >
       <div className="modal-row">
         <div className="left-container modal-col">

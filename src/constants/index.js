@@ -10,19 +10,39 @@ const HR4_STATUS_KEY = "hr4Status";
 
 export const TRACKED_ISSUES = [{
     key: IMPEACHMENT_STATUS_KEY,
-    header: "Impeachment Trial"
+    header: "Impeachment Trial",
+    link: "#impeachment",
+    description: "Are your Senators planning to convict former President Trump for inciting an insurrection against the U.S. Congress?",
+    aboutLinkText: "Read the article of impeachment.",
+    aboutLinkHref: "https://en.wikisource.org/wiki/Article_of_Impeachment_against_Donald_J._Trump_(2021)"
 }, {
     key: FILIBUSTER_STATUS_KEY,
-    header: "Filibuster Reform"
+    header: "Filibuster Reform",
+    link: "#filibuster",
+    description: "Do your Senators support reforming the 60-vote legislative filibuster?",
+    aboutLinkText: "Learn about the filibuster.",
+    aboutLinkHref: "https://www.senate.gov/artandhistory/history/common/briefing/Filibuster_Cloture.htm"
 }, {
     key: DC_STATEHOOD_STATUS_KEY,
-    header: "D.C. Statehood"
+    header: "D.C. Statehood",
+    link: "#dc-statehood",
+    description: "Do your Senators support statehood for Washington, D.C.?",
+    aboutLinkText: "See legislative details.",
+    aboutLinkHref: "https://www.congress.gov/bill/116th-congress/house-bill/51"
 }, {
     key: HR1_STATUS_KEY,
-    header: "For the People Act"
+    header: "For the People Act",
+    link: "#hr1",
+    description: "Do your Senators support expanding Americans voting access and limiting the influence of money in our elections?",
+    aboutLinkText: "See legislative details.",
+    aboutLinkHref: "https://www.congress.gov/bill/116th-congress/house-bill/51"
 }, {
     key: HR4_STATUS_KEY,
-    header: "John Lewis Voting Rights Advancement Act"
+    header: "John Lewis Voting Rights Advancement Act",
+    link: "#hr2",
+    description: "Do your Senators support restoring and expanding the Voting Rights Act?",
+    aboutLinkText: "See legislative details.",
+    aboutLinkHref: "https://www.leahy.senate.gov/imo/media/doc/John%20Lewis%20Voting%20Rights%20Advancement%20Act%20one%20pager.pdf"
 }]
 
 export const STATUS_TO_SHOW = IMPEACHMENT_STATUS_KEY;
@@ -138,7 +158,7 @@ export const STATUS_MAPPING = {
         longStatus: STATUS_TYPES_LIST
     },
     [IMPEACHMENT_STATUS_KEY]: {
-        shortStatus: SHORT_IMPEACHMENT_STATUS_TYPE_LIST,
+        shortStatus: IMPEACHMENT_STATUS_TYPE_LIST,
         longStatus: IMPEACHMENT_STATUS_TYPE_LIST
     },
     [DC_STATEHOOD_STATUS_KEY]: {
