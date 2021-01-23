@@ -7,10 +7,9 @@
 
 }
 
-.half-way {
-    width: 66.67%;
-    border-right: black 1px solid;
+.overlay-marker {
+    width: 2px;
+    border-left: black 1px solid;
     height: 24px;
     position: relative;
-    top: -22px;
 }

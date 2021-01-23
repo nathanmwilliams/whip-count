@@ -1,10 +1,13 @@
 import React from "react";
 import { map } from "lodash";
+import classNames from "classnames";
+import { Tooltip } from "antd";
+
 import { STATUS_COLORS_PROGRESS } from "../../constants";
 
 import "./style.css";
 
-const ProgressBar = ({ senateMapByStatus }) => (
+const ProgressBar = ({ senateMapByStatus, markerPosition }) => (
   <div className="progress-bar-container">
     <div className="progress-bar">
       {map(senateMapByStatus, (senators, status) => {
@@ -23,7 +26,18 @@ const ProgressBar = ({ senateMapByStatus }) => (
         );
       })}
     </div>
-    <div className="half-way"></div>
+    {markerPosition.map((pos, index) => {
+      const top = (index + 1) * -22 - index;
+      const opacity = 1 - index / 2;
+      return (
+        <Tooltip title={pos}>
+          <div
+            className={classNames("overlay-marker")}
+            style={{ left: `${pos}%`, top: `${top}px`, opacity }}
+          ></div>
+        </Tooltip>
+      );
+    })}
   </div>
 );
 

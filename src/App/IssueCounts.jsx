@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Col, Row, Tooltip, Layout, Image } from "antd";
-import { map } from "lodash";
+import { map, find } from "lodash";
 
 
 import './style.css';
@@ -9,6 +9,7 @@ import SenateTable from '../components/Table';
 import circleInPerson from '../circle-in-person.svg'
 import ProgressBar from '../components/ProgressBar';
 import { getShortStatusText } from './selectors';
+import { TRACKED_ISSUES } from '../constants';
 
 
 const tooltipPlacement = {
@@ -108,7 +109,7 @@ class IssueCounts extends Component {
           })}
         </Row>
         {senateMapByStatus[1] && (
-          <ProgressBar senateMapByStatus={senateMapByStatus} />
+          <ProgressBar senateMapByStatus={senateMapByStatus} markerPosition={find(TRACKED_ISSUES, {key: selectedIssue}).markerPosition}/>
         )}
         <Row className="table-container" gutter={16}>
           <SenateTable
