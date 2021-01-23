@@ -61,6 +61,15 @@ class App extends Component {
   };
 
   componentDidMount = () => {
+    if (window.location.hash) {
+      const issue = find(TRACKED_ISSUES, { link: window.location.hash });
+      if (issue) {
+        this.setIssue(issue.key)
+      } else {
+        window.history.replaceState({}, "", "/");
+      }
+    }
+
     firebasedb
       .ref("townHalls")
       .once("value")
@@ -128,6 +137,7 @@ class App extends Component {
   };
 
   clearIssue = () => {
+    window.history.pushState({}, "", "/")
     this.setState({ selectedIssue: "" });
   };
 

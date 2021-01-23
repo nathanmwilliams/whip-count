@@ -7,7 +7,7 @@ const LandingPageCards = ({ setIssue, height }) => (
   <div style={{ height: height }} className="landing-page">
     <Row gutter={[16, 16]} justify="space-evenly" align="stretch" className="cards-row">
       {TRACKED_ISSUES.map((issue) => (
-        <Col span={8} >
+        <Col span={8} key={issue.key}>
           <Card
             hoverable
             className="issue-card"
