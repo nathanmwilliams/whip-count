@@ -50,15 +50,14 @@ export const getStatusTypes = (issue) => {
 
 export const getStatusDisplay = (issue) => {
     const statusDisplay = STATUS_MAPPING[issue].longStatus
-    .map((status, index) => {
-        
-        return {
-            value: index + 1,
-            text: status,
-        }
-    })
-    .filter((ele) => !!ele.text)
-    console.log(statusDisplay)
+        .map((status, index) => {
+
+            return {
+                value: index + 1,
+                text: status,
+            }
+        })
+        .filter((ele) => !!ele.text)
     return statusDisplay
 }
 
