@@ -44,7 +44,7 @@ export const TRACKED_ISSUES = [{
 }, {
     key: HR4_STATUS_KEY,
     header: "John Lewis Voting Rights Advancement Act",
-    link: "#hr2",
+    link: "#hr4",
     description: "Do your Senators support restoring and expanding the Voting Rights Act?",
     aboutLinkText: "See legislative details.",
     aboutLinkHref: "https://www.leahy.senate.gov/imo/media/doc/John%20Lewis%20Voting%20Rights%20Advancement%20Act%20one%20pager.pdf",
