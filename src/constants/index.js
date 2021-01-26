@@ -89,7 +89,7 @@ const IMPEACHMENT_STATUS_TYPE_LIST = [
     "Expected to vote to convict",
     "Supported House impeachment",
     "Position unknown",
-    "Non-committal on trial vote",
+    "Voted that trial is unconstitutional",
     "Opposes conviction"
 ]
 
