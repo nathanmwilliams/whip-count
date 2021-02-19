@@ -9,14 +9,6 @@ const HR1_STATUS_KEY = "hr1Status";
 const HR4_STATUS_KEY = "hr4Status";
 
 export const TRACKED_ISSUES = [{
-    key: IMPEACHMENT_STATUS_KEY,
-    header: "Impeachment Trial",
-    link: "#impeachment",
-    description: "Are your Senators planning to convict former President Trump for inciting an insurrection against the U.S. Congress?",
-    aboutLinkText: "Read the article of impeachment.",
-    aboutLinkHref: "https://en.wikisource.org/wiki/Article_of_Impeachment_against_Donald_J._Trump_(2021)",
-    markerPosition: [67],
-}, {
     key: FILIBUSTER_STATUS_KEY,
     header: "Filibuster Reform",
     link: "#filibuster",
