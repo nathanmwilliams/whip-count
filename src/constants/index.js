@@ -85,14 +85,6 @@ const IMPEACHMENT_STATUS_TYPE_LIST = [
     "Opposes conviction"
 ]
 
-const SHORT_IMPEACHMENT_STATUS_TYPE_LIST = [
-    "Full support for impeachment",
-    "Open to removal options",
-    "No position",
-    "No comment or vague comments",
-    "Opposed to impeachment"
-]
-
 const ELECTION_STATUS_TYPE_LIST = [
     "Voting to certify Biden's Electoral College victory",
     "Calls to begin transition processes",
@@ -179,9 +171,9 @@ export const STATUS_MAPPING = {
 
 const DARK_PURPLE = "#542788"
 const MED_PURPLE = "#998ec3"
-const LIGHT_PURPLE = "#c8afdf";
+// const LIGHT_PURPLE = "#c8afdf";
 const GRAY = "#c3c3c3"
-const LIGHT_ORANGE = "#fee0b6"
+// const LIGHT_ORANGE = "#fee0b6"
 const MED_ORANGE = "#f1a340"
 const DARK_ORANGE = "#e66101"
 

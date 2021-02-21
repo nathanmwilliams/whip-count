@@ -7,30 +7,19 @@ import classNames from "classnames";
 import { firestore, firebasedb } from '../utils/setup-firebase';
 import {
   getFilteredSenators,
-  getLongStatusText,
   getSenatorsByStatus,
-  getShortStatusText,
 } from "./selectors";
 import SenatorModal from "../components/Modal";
 import Search from "../components/Search";
 import './style.css';
-import SenateTable, { makeSortFunction } from '../components/Table';
-import ProgressBar from "../components/ProgressBar";
+import { makeSortFunction } from '../components/Table';
 
 import thpLogo from '../thp-logo.png';
-import circleInPerson from '../circle-in-person.svg'
 import IssueCounts from './IssueCounts';
 import LandingPageCards from '../components/LandingPageCards';
 import { TRACKED_ISSUES } from '../constants';
 
 const { Header, Content, Footer } = Layout;
-
-const tooltipPlacement = {
-  1: "right",
-  2: "top",
-  3: "top",
-  4: "left"
-}
 
 const formatParty = (party) => {
   if (!party) {

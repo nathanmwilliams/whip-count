@@ -48,25 +48,25 @@ const townHallsDisplay = (townHalls) => (
   </Card>
 );
 
-const renderCitation = (senator) => {
-  return (
-    <>
-      {/* {quote.year && <p className="quote-year">Statement in {quote.year}</p>}
-      <p className="quote">{quote.text}</p> */}
-      {senator.electionAcknowledgmentCitation && (
-        <p className="quote-citation">
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={senator.electionAcknowledgmentCitation}
-          >
-            Link to citation
-          </a>
-        </p>
-      )}
-    </>
-  );
-};
+// const renderCitation = (senator) => {
+//   return (
+//     <>
+//       {/* {quote.year && <p className="quote-year">Statement in {quote.year}</p>}
+//       <p className="quote">{quote.text}</p> */}
+//       {senator.electionAcknowledgmentCitation && (
+//         <p className="quote-citation">
+//           <a
+//             target="_blank"
+//             rel="noopener noreferrer"
+//             href={senator.electionAcknowledgmentCitation}
+//           >
+//             Link to citation
+//           </a>
+//         </p>
+//       )}
+//     </>
+//   );
+// };
 
 const SenatorModal = ({
   senator,

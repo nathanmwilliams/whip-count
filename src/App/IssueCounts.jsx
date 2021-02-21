@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Tooltip, Layout, Image } from "antd";
+import { Col, Row, Tooltip, Image } from "antd";
 import { map, find } from "lodash";
 
 
