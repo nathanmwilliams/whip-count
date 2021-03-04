@@ -288,7 +288,7 @@ class App extends Component {
             </a>{" "}
           </div>
           <div>
-            <Button href="mailto:info@townhallproject.com" type="text">
+            <Button href="mailto:info@peoplestownhall.org" type="text">
               Contact
             </Button>
           </div>
