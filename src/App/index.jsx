@@ -14,7 +14,6 @@ import Search from "../components/Search";
 import './style.css';
 import { makeSortFunction } from '../components/Table';
 
-import thpLogo from '../thp-logo.png';
 import IssueCounts from './IssueCounts';
 import LandingPageCards from '../components/LandingPageCards';
 import { TRACKED_ISSUES } from '../constants';
@@ -267,7 +266,7 @@ class App extends Component {
           )}
         </Content>
         <Footer>
-          <div>
+          {/* <div>
             <a
               href="https://townhallproject.com"
               target="_blank"
@@ -280,7 +279,7 @@ class App extends Component {
             <Button href="mailto:info@townhallproject.com" type="text">
               Contact
             </Button>
-          </div>
+          </div> */}
         </Footer>
       </Layout>
     );
