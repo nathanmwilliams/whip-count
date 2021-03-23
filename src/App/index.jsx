@@ -274,12 +274,12 @@ class App extends Component {
             >
               <img className="logo" alt="town hall project" src={thpLogo} />
             </a>{" "}
-          </div>
+          </div> */}
           <div>
-            <Button href="mailto:info@townhallproject.com" type="text">
+            <Button href="mailto:info@peoplestownhall.org" type="text">
               Contact
             </Button>
-          </div> */}
+          </div>
         </Footer>
       </Layout>
     );
